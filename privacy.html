@@ -4,34 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - TERRION Games</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* ---- CSS Reset & Global Variables ---- */
+        /* ---- Global Variables (메인 페이지와 통일) ---- */
         :root {
             --bg-color: #0a0a12;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
+            --card-bg: rgba(20, 20, 28, 0.7); /* 가독성을 위해 조금 더 어두운 유리 */
+            --text-primary: #e0e0e0;
+            --text-heading: #ffffff;
             --accent-neon: #00f2ff;
             --accent-purple: #bd00ff;
+            --border-color: rgba(0, 242, 255, 0.2);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif; /* 본문은 가독성 좋은 Inter */
             background-color: var(--bg-color);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.7;
+            padding: 40px 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            overflow-x: hidden;
-            position: relative;
         }
 
+        /* 배경 그리드 효과 */
         body::before {
             content: "";
             position: fixed;
@@ -41,208 +45,231 @@
                 linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
             background-size: 30px 30px;
             z-index: -2;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            top: 50%; left: 50%;
-            width: 60vw; height: 60vh;
-            background: radial-gradient(circle, rgba(189, 0, 255, 0.15) 0%, rgba(10, 10, 18, 0) 70%);
-            transform: translate(-50%, -50%);
-            z-index: -1;
             pointer-events: none;
         }
 
-        a {
-            text-decoration: none;
+        /* 드래그했을 때 네온 색상 하이라이트 */
+        ::selection {
+            background: var(--accent-neon);
+            color: #000;
+        }
+
+        /* ---- Navigation Button ---- */
+        .nav-header {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
             color: var(--accent-neon);
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: rgba(0, 242, 255, 0.05);
             transition: all 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background: var(--accent-neon);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+        }
+
+        .btn-home::before {
+            content: '< ';
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        /* ---- Main Document Container ---- */
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card-bg);
+            backdrop-filter: blur(15px); /* 유리 효과 */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ---- Typography ---- */
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text-heading);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+        }
+
+        .last-updated {
+            text-align: center;
+            font-family: 'Fira Code', monospace;
+            color: var(--accent-neon);
+            margin-top: -20px;
+            margin-bottom: 40px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        h2 {
+            font-family: 'Fira Code', monospace; /* 섹션 제목은 코딩 폰트로 기술적 느낌 */
+            color: var(--accent-neon);
+            font-size: 1.4rem;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: '//';
+            margin-right: 10px;
+            color: var(--accent-purple);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        strong {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 20px;
+            padding-left: 10px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* ---- Contact Box Style ---- */
+        .contact {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--accent-neon);
+            padding: 20px 25px;
+            border-radius: 0 4px 4px 0;
+            margin-top: 30px;
+        }
+        
+        .contact p {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--accent-neon);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--border-color);
+            transition: 0.2s;
         }
 
         a:hover {
             color: #fff;
-            text-shadow: 0 0 10px var(--accent-neon);
+            border-bottom-style: solid;
         }
 
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-            z-index: 1;
-        }
-
-        .hero-section { margin-bottom: 60px; }
-
-        h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, var(--accent-neon), #fff, var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.4));
-        }
-
-        .tagline {
-            font-family: 'Fira Code', monospace;
-            font-size: 1.2rem;
-            color: var(--accent-neon);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-neon), transparent);
-            margin: 50px 0;
-            opacity: 0.3;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            text-align: left;
-        }
-
-        .info-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .info-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-neon);
-            box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.3);
-        }
-
-        .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: 0.5s;
-        }
-        .info-card:hover::before { left: 100%; }
-
-        h3 {
-            font-family: 'Fira Code', monospace;
-            color: var(--accent-neon);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-        }
-        
-        h3::before { content: '>'; margin-right: 10px; color: var(--accent-purple); }
-
-        .info-content p {
-            margin-bottom: 10px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .label-icon {
-            display: inline-block;
-            width: 24px;
-            margin-right: 10px;
-            font-style: normal;
-        }
-
-        .privacy-link {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background: rgba(0, 242, 255, 0.1);
-            border: 1px solid var(--accent-neon);
-            border-radius: 5px;
-            font-family: 'Fira Code', monospace;
-            font-weight: bold;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-        
-        .privacy-link:hover {
-             background: var(--accent-neon);
-             color: var(--bg-color);
-             box-shadow: 0 0 20px var(--accent-neon);
-        }
-
+        /* ---- Footer ---- */
         .footer {
-            margin-top: 70px;
+            margin-top: 50px;
             font-family: 'Fira Code', monospace;
             font-size: 0.8rem;
-            color: var(--text-secondary);
-            opacity: 0.7;
+            color: #666;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
+            width: 100%;
         }
 
+        /* ---- Mobile Responsive ---- */
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            .info-grid { grid-template-columns: 1fr; }
-            .container { padding: 30px 15px; }
+            .doc-container { padding: 30px 20px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.2rem; }
+            body { padding: 20px 10px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="hero-section">
-            <h1>TERRION</h1>
-            <p class="tagline"><strong>Mobile Game Studio</strong></p>
-            <p class="description">Creating 'Love Marble' for couples worldwide.</p>
-        </div>
-        
-        <hr>
-        
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>Contact Us</h3>
-                <div class="info-content">
-                    <p><span class="label-icon">🌍</span> Based in Republic of Korea</p>
-                    <p><span class="label-icon">📧</span> <a href="mailto:contact@terriongames.com">contact@terriongames.com</a></p>
-                    <p><span class="label-icon">🤝</span> Open for Partnership</p>
-                </div>
-            </div>
 
-            <div class="info-card">
-                <h3>Privacy Policy</h3>
-                <div class="info-content">
-                    <p>We value your privacy. Please check our policy below.</p>
-                    <a href="privacy.html" class="privacy-link">[ VIEW PRIVACY POLICY ]</a>
-                </div>
-            </div>
+    <div class="nav-header">
+        <a href="index.html" class="btn-home">SYSTEM MAIN</a>
+    </div>
+
+    <div class="doc-container">
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Last updated: January 30, 2026</p>
+
+        <p><strong>TERRION Games</strong> ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application <strong>"Love Marble"</strong>.</p>
+
+        <h2>1. Information We Collect</h2>
+        <p>We may collect the following types of information to provide better game services and improve user experience:</p>
+        <ul>
+            <li><strong>User Provided Information:</strong> Nicknames, anniversary dates, and couple data entered voluntarily within the app.</li>
+            <li><strong>Device Information:</strong> Device model, OS version, language settings, and IP address for troubleshooting.</li>
+            <li><strong>Usage Data:</strong> Game progress, button clicks, round completion rates, and session duration.</li>
+            <li><strong>Transaction Data:</strong> When you make a purchase (e.g., Premium Pack), we collect transaction details such as <strong>product ID, price, and currency</strong> to analyze sales performance. <em>Note: We do not store your credit card information; payments are processed by Apple (App Store) or Google (Play Store).</em></li>
+        </ul>
+        
+        <h2>2. How We Use Your Information</h2>
+        <p>We use the collected information for the following purposes:</p>
+        <ul>
+            <li>To provide, operate, and maintain the "Love Marble" game service.</li>
+            <li>To calculate D-days and manage couple records locally.</li>
+            <li>To analyze game performance, fix bugs, and improve stability.</li>
+            <li><strong>To measure marketing efficiency:</strong> We analyze purchase data (ROAS) to understand the effectiveness of our advertising campaigns using third-party tools.</li>
+        </ul>
+
+        <h2>3. Third-Party Services</h2>
+        <p>We use third-party services that may collect information used to identify your device. These tools help us understand usage patterns and improve our app:</p>
+        <ul>
+            <li><strong>Unity Analytics:</strong> For analyzing game usage and player behavior.</li>
+            <li><strong>Google Analytics for Firebase:</strong> For analyzing user demographics, retention, and purchase conversions.</li>
+            <li><strong>Google Ads:</strong> For tracking ad conversions and marketing effectiveness.</li>
+        </ul>
+
+        <h2>4. Data Sharing</h2>
+        <p>We do not sell, trade, or rent your personal identification information to others. We may share generic aggregated demographic information regarding visitors and users with our business partners and advertisers for the purposes outlined above.</p>
+
+        <h2>5. Children's Privacy</h2>
+        <p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If we discover that a child under 13 has provided us with personal information, we will delete it immediately.</p>
+
+        <h2>6. Contact Us</h2>
+        <div class="contact">
+            <p>If you have any questions about this Privacy Policy, please contact us:</p>
+            <p><strong>Email:</strong> <a href="mailto:contact@terriongames.com">contact@terriongames.com</a></p>
         </div>
 
         <div class="footer">
-            &copy; 2026 TERRION Games. All rights reserved.
-            <br> // SYSTEM READY_
+            &copy; 2026 TERRION Games. All rights reserved.<br>
+            SECURE CONNECTION ESTABLISHED
         </div>
     </div>
 </body>

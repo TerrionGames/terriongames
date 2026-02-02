@@ -216,7 +216,7 @@
     <div class="doc-container">
         <h1 data-i18n="doc_title">Privacy Policy</h1>
         <p class="last-updated" data-i18n="last_updated">Last updated: January 30, 2026</p>
-
+        <p id="notice-msg" style="color: var(--accent-neon); font-size: 0.85rem; margin-bottom: 20px; font-style: italic;"></p>
         <p data-i18n="intro"><strong>TERRION Games</strong> is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application <strong>"Love Marble"</strong>.</p>
 
         <h2 data-i18n="h1">1. Information We Collect</h2>
@@ -264,6 +264,107 @@
     </div>
 
     <script>
+        const translations = {
+            "en": {
+                nav_home: "SYSTEM MAIN",
+                doc_title: "Privacy Policy",
+                last_updated: "Last updated: January 30, 2026",
+                notice: "", // 영어는 안내 문구 필요 없음
+                // ... (이하 본문 내용은 아까와 동일)
+            },
+            "ko": {
+                nav_home: "메인으로",
+                doc_title: "개인정보 처리방침",
+                last_updated: "최종 수정일: 2026년 1월 30일",
+                notice: "", // 한국어도 번역본이 있으므로 필요 없음
+                // ... (이하 본문 내용은 아까와 동일)
+            },
+            // 나머지 국가: UI는 번역 + 본문은 영어 + "안내 문구" 추가
+            "ja": { 
+                nav_home: "メイン画面", 
+                doc_title: "プライバシーポリシー", 
+                last_updated: "最終更新日: 2026年1月30日",
+                notice: "※ 法的な正確性を期すため、本ポリシーは英語で提供されます。" 
+            },
+            "ch-TW": { 
+                nav_home: "系統主頁", 
+                doc_title: "隱私權政策", 
+                last_updated: "最後更新：2026年1月30日",
+                notice: "※ 為了確保法律準確性，本政策以英文提供。" 
+            },
+            "th": { 
+                nav_home: "หน้าหลัก", 
+                doc_title: "นโยบายความเป็นส่วนตัว", 
+                last_updated: "อัปเดตล่าสุด: 30 มกราคม 2026",
+                notice: "※ เพื่อความถูกต้องทางกฎหมาย นโยบายนี้จัดทำเป็นภาษาอังกฤษ" 
+            },
+            "vn": { 
+                nav_home: "Trang chủ", 
+                doc_title: "Chính sách bảo mật", 
+                last_updated: "Cập nhật lần cuối: 30/01/2026",
+                notice: "※ Để đảm bảo tính chính xác về mặt pháp lý, chính sách này được cung cấp bằng tiếng Anh." 
+            },
+            "hi": { 
+                nav_home: "होम", 
+                doc_title: "गोपनीयता नीति", 
+                last_updated: "अंतिम अपडेट: 30 जनवरी 2026",
+                notice: "※ कानूनी सटीकता के लिए, यह नीति अंग्रेजी में प्रदान की गई है।" 
+            },
+            "id": { 
+                nav_home: "Beranda", 
+                doc_title: "Kebijakan Privasi", 
+                last_updated: "Terakhir diperbarui: 30 Januari 2026",
+                notice: "※ Demi keakuratan hukum, kebijakan ini disediakan dalam bahasa Inggris." 
+            },
+            "fr": { 
+                nav_home: "Accueil", 
+                doc_title: "Politique de confidentialité", 
+                last_updated: "Dernière mise à jour : 30 janvier 2026",
+                notice: "※ Pour des raisons de précision juridique, ce document est fourni en anglais." 
+            },
+            "de": { 
+                nav_home: "Startseite", 
+                doc_title: "Datenschutzerklärung", 
+                last_updated: "Letzte Aktualisierung: 30. Januar 2026",
+                notice: "※ Aus rechtlichen Gründen wird diese Richtlinie in englischer Sprache bereitgestellt." 
+            },
+            "es-ES": { 
+                nav_home: "Inicio", 
+                doc_title: "Política de Privacidad", 
+                last_updated: "Última actualización: 30 de enero de 2026",
+                notice: "※ Para garantizar la precisión legal, esta política se proporciona en inglés." 
+            },
+            "es-MX": { 
+                nav_home: "Inicio", 
+                doc_title: "Política de Privacidad", 
+                last_updated: "Última actualización: 30 de enero de 2026",
+                notice: "※ Para garantizar la precisión legal, esta política se proporciona en inglés." 
+            },
+            "pt-BR": { 
+                nav_home: "Início", 
+                doc_title: "Política de Privacidade", 
+                last_updated: "Última atualização: 30 de janeiro de 2026",
+                notice: "※ Para precisão legal, esta política é fornecida em inglês." 
+            },
+            "it": { 
+                nav_home: "Home", 
+                doc_title: "Informativa sulla privacy", 
+                last_updated: "Ultimo aggiornamento: 30 gennaio 2026",
+                notice: "※ Per accuratezza legale, questa informativa è fornita in inglese." 
+            },
+            "ru": { 
+                nav_home: "Главная", 
+                doc_title: "Политика конфиденциальности", 
+                last_updated: "Обновлено: 30 января 2026",
+                notice: "※ Для юридической точности этот документ представлен на английском языке." 
+            },
+            "tr": { 
+                nav_home: "Ana Sayfa", 
+                doc_title: "Gizlilik Politikası", 
+                last_updated: "Son güncelleme: 30 Ocak 2026",
+                notice: "※ Yasal doğruluk sağlamak amacıyla bu politika İngilizce olarak sunulmaktadır." 
+            }
+        };
         // 16개국 번역 데이터 (현재 EN, KO 완벽 적용, 나머지 언어는 UI만 적용 + 본문은 영어 Fallback)
         const translations = {
             "en": {
@@ -343,6 +444,12 @@
             const data = translations[lang] || translations['en'];
             const fallbackData = translations['en']; // 번역 안 된 부분은 영어로
 
+            // Notice 처리 로직 추가
+            const noticeEl = document.getElementById('notice-msg');
+            if(noticeEl) {
+                noticeEl.innerText = data.notice || ""; 
+            }
+            
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 // 해당 언어에 키가 있으면 사용, 없으면 영어 사용

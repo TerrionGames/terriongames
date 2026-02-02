@@ -6,10 +6,10 @@
     <title>Privacy Policy - TERRION Games</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* ---- Global Variables (메인 페이지와 통일) ---- */
+        /* ---- Global Variables ---- */
         :root {
             --bg-color: #0a0a12;
-            --card-bg: rgba(20, 20, 28, 0.7); /* 가독성을 위해 조금 더 어두운 유리 */
+            --card-bg: rgba(20, 20, 28, 0.7);
             --text-primary: #e0e0e0;
             --text-heading: #ffffff;
             --accent-neon: #00f2ff;
@@ -17,14 +17,10 @@
             --border-color: rgba(0, 242, 255, 0.2);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif; /* 본문은 가독성 좋은 Inter */
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.7;
@@ -35,7 +31,6 @@
             align-items: center;
         }
 
-        /* 배경 그리드 효과 */
         body::before {
             content: "";
             position: fixed;
@@ -48,19 +43,16 @@
             pointer-events: none;
         }
 
-        /* 드래그했을 때 네온 색상 하이라이트 */
-        ::selection {
-            background: var(--accent-neon);
-            color: #000;
-        }
+        ::selection { background: var(--accent-neon); color: #000; }
 
-        /* ---- Navigation Button ---- */
+        /* ---- Navigation & Language ---- */
         .nav-header {
             width: 100%;
             max-width: 900px;
             margin-bottom: 20px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between; /* 양쪽 정렬 */
+            align-items: center;
         }
 
         .btn-home {
@@ -83,25 +75,38 @@
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
         }
 
-        .btn-home::before {
-            content: '< ';
-            margin-right: 8px;
-            font-weight: bold;
+        .btn-home::before { content: '< '; margin-right: 8px; font-weight: bold; }
+
+        /* Language Selector Style */
+        .lang-select {
+            background: rgba(10, 10, 18, 0.8);
+            color: var(--accent-neon);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            font-family: 'Fira Code', monospace;
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+            font-size: 0.85rem;
+        }
+        
+        .lang-select:hover, .lang-select:focus {
+            border-color: var(--accent-neon);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
         }
 
-        /* ---- Main Document Container ---- */
+        /* ---- Doc Container ---- */
         .doc-container {
             width: 100%;
             max-width: 900px;
             background: var(--card-bg);
-            backdrop-filter: blur(15px); /* 유리 효과 */
+            backdrop-filter: blur(15px);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 50px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
-        /* ---- Typography ---- */
         h1 {
             font-family: 'Montserrat', sans-serif;
             font-size: 2.5rem;
@@ -126,7 +131,7 @@
         }
 
         h2 {
-            font-family: 'Fira Code', monospace; /* 섹션 제목은 코딩 폰트로 기술적 느낌 */
+            font-family: 'Fira Code', monospace;
             color: var(--accent-neon);
             font-size: 1.4rem;
             margin-top: 50px;
@@ -135,53 +140,26 @@
             align-items: center;
         }
 
-        h2::before {
-            content: '//';
-            margin-right: 10px;
-            color: var(--accent-purple);
-        }
+        h2::before { content: '//'; margin-right: 10px; color: var(--accent-purple); }
 
-        p {
-            margin-bottom: 1.5rem;
-            font-weight: 300;
-        }
+        p { margin-bottom: 1.5rem; font-weight: 300; }
+        strong { font-weight: 600; color: #fff; }
 
-        strong {
-            font-weight: 600;
-            color: #fff;
-        }
-
-        ul {
-            list-style: none;
-            margin-bottom: 20px;
-            padding-left: 10px;
-        }
-
-        li {
-            margin-bottom: 12px;
-            padding-left: 20px;
-            position: relative;
-        }
-
+        ul { list-style: none; margin-bottom: 20px; padding-left: 10px; }
+        li { margin-bottom: 12px; padding-left: 20px; position: relative; }
         li::before {
             content: '>';
-            position: absolute;
-            left: 0;
+            position: absolute; left: 0;
             color: var(--accent-purple);
             font-family: 'Fira Code', monospace;
         }
 
-        /* ---- Contact Box Style ---- */
         .contact {
             background: rgba(0, 0, 0, 0.3);
             border-left: 3px solid var(--accent-neon);
             padding: 20px 25px;
             border-radius: 0 4px 4px 0;
             margin-top: 30px;
-        }
-        
-        .contact p {
-            margin-bottom: 0.5rem;
         }
 
         a {
@@ -190,13 +168,8 @@
             border-bottom: 1px dashed var(--border-color);
             transition: 0.2s;
         }
+        a:hover { color: #fff; border-bottom-style: solid; }
 
-        a:hover {
-            color: #fff;
-            border-bottom-style: solid;
-        }
-
-        /* ---- Footer ---- */
         .footer {
             margin-top: 50px;
             font-family: 'Fira Code', monospace;
@@ -208,7 +181,6 @@
             width: 100%;
         }
 
-        /* ---- Mobile Responsive ---- */
         @media (max-width: 768px) {
             .doc-container { padding: 30px 20px; }
             h1 { font-size: 1.8rem; }
@@ -220,50 +192,68 @@
 <body>
 
     <div class="nav-header">
-        <a href="index.html" class="btn-home">SYSTEM MAIN</a>
+        <a href="index.html" class="btn-home" data-i18n="nav_home">SYSTEM MAIN</a>
+        <select id="languagePicker" class="lang-select">
+            <option value="en">English</option>
+            <option value="ko">한국어</option>
+            <option value="ja">日本語</option>
+            <option value="ch-TW">繁體中文</option>
+            <option value="th">ภาษาไทย</option>
+            <option value="vn">Tiếng Việt</option>
+            <option value="hi">हिन्दी</option>
+            <option value="id">Bahasa Indonesia</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="es-ES">Español (ES)</option>
+            <option value="es-MX">Español (MX)</option>
+            <option value="pt-BR">Português (BR)</option>
+            <option value="it">Italiano</option>
+            <option value="ru">Русский</option>
+            <option value="tr">Türkçe</option>
+        </select>
     </div>
 
     <div class="doc-container">
-        <h1>Privacy Policy</h1>
-        <p class="last-updated">Last updated: January 30, 2026</p>
+        <h1 data-i18n="doc_title">Privacy Policy</h1>
+        <p class="last-updated" data-i18n="last_updated">Last updated: January 30, 2026</p>
 
-        <p><strong>TERRION Games</strong> ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application <strong>"Love Marble"</strong>.</p>
+        <p data-i18n="intro"><strong>TERRION Games</strong> is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application <strong>"Love Marble"</strong>.</p>
 
-        <h2>1. Information We Collect</h2>
-        <p>We may collect the following types of information to provide better game services and improve user experience:</p>
+        <h2 data-i18n="h1">1. Information We Collect</h2>
+        <p data-i18n="p1">We may collect the following types of information to provide better game services and improve user experience:</p>
         <ul>
-            <li><strong>User Provided Information:</strong> Nicknames, anniversary dates, and couple data entered voluntarily within the app.</li>
-            <li><strong>Device Information:</strong> Device model, OS version, language settings, and IP address for troubleshooting.</li>
-            <li><strong>Usage Data:</strong> Game progress, button clicks, round completion rates, and session duration.</li>
-            <li><strong>Transaction Data:</strong> When you make a purchase (e.g., Premium Pack), we collect transaction details such as <strong>product ID, price, and currency</strong> to analyze sales performance. <em>Note: We do not store your credit card information; payments are processed by Apple (App Store) or Google (Play Store).</em></li>
+            <li data-i18n="li1_1"><strong>User Provided Information:</strong> Nicknames, anniversary dates, and couple data entered voluntarily within the app.</li>
+            <li data-i18n="li1_2"><strong>Device Information:</strong> Device model, OS version, language settings, and IP address for troubleshooting.</li>
+            <li data-i18n="li1_3"><strong>Usage Data:</strong> Game progress, button clicks, round completion rates, and session duration.</li>
+            <li data-i18n="li1_4"><strong>Transaction Data:</strong> When you make a purchase, we collect transaction details (product ID, price) to analyze sales. We do not store credit card info.</li>
         </ul>
         
-        <h2>2. How We Use Your Information</h2>
-        <p>We use the collected information for the following purposes:</p>
+        <h2 data-i18n="h2">2. How We Use Your Information</h2>
+        <p data-i18n="p2">We use the collected information for the following purposes:</p>
         <ul>
-            <li>To provide, operate, and maintain the "Love Marble" game service.</li>
-            <li>To calculate D-days and manage couple records locally.</li>
-            <li>To analyze game performance, fix bugs, and improve stability.</li>
-            <li><strong>To measure marketing efficiency:</strong> We analyze purchase data (ROAS) to understand the effectiveness of our advertising campaigns using third-party tools.</li>
+            <li data-i18n="li2_1">To provide, operate, and maintain the "Love Marble" game service.</li>
+            <li data-i18n="li2_2">To calculate D-days and manage couple records locally.</li>
+            <li data-i18n="li2_3">To analyze game performance, fix bugs, and improve stability.</li>
+            <li data-i18n="li2_4">To measure marketing efficiency (ROAS) and ad campaign effectiveness.</li>
         </ul>
 
-        <h2>3. Third-Party Services</h2>
-        <p>We use third-party services that may collect information used to identify your device. These tools help us understand usage patterns and improve our app:</p>
+        <h2 data-i18n="h3">3. Third-Party Services</h2>
+        <p data-i18n="p3">We use third-party services that may collect information used to identify your device:</p>
         <ul>
-            <li><strong>Unity Analytics:</strong> For analyzing game usage and player behavior.</li>
-            <li><strong>Google Analytics for Firebase:</strong> For analyzing user demographics, retention, and purchase conversions.</li>
-            <li><strong>Google Ads:</strong> For tracking ad conversions and marketing effectiveness.</li>
+            <li data-i18n="li3_1"><strong>Unity Analytics:</strong> For analyzing game usage and player behavior.</li>
+            <li data-i18n="li3_2"><strong>Google Analytics for Firebase:</strong> For analyzing demographics and retention.</li>
+            <li data-i18n="li3_3"><strong>Google Ads:</strong> For tracking ad conversions and marketing effectiveness.</li>
         </ul>
 
-        <h2>4. Data Sharing</h2>
-        <p>We do not sell, trade, or rent your personal identification information to others. We may share generic aggregated demographic information regarding visitors and users with our business partners and advertisers for the purposes outlined above.</p>
+        <h2 data-i18n="h4">4. Data Sharing</h2>
+        <p data-i18n="p4">We do not sell, trade, or rent your personal identification information. We may share generic aggregated information with partners for the purposes outlined above.</p>
 
-        <h2>5. Children's Privacy</h2>
-        <p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If we discover that a child under 13 has provided us with personal information, we will delete it immediately.</p>
+        <h2 data-i18n="h5">5. Children's Privacy</h2>
+        <p data-i18n="p5">Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13.</p>
 
-        <h2>6. Contact Us</h2>
+        <h2 data-i18n="h6">6. Contact Us</h2>
         <div class="contact">
-            <p>If you have any questions about this Privacy Policy, please contact us:</p>
+            <p data-i18n="contact_msg">If you have any questions about this Privacy Policy, please contact us:</p>
             <p><strong>Email:</strong> <a href="mailto:contact@terriongames.com">contact@terriongames.com</a></p>
         </div>
 
@@ -272,5 +262,137 @@
             SECURE CONNECTION ESTABLISHED
         </div>
     </div>
+
+    <script>
+        // 16개국 번역 데이터 (현재 EN, KO 완벽 적용, 나머지 언어는 UI만 적용 + 본문은 영어 Fallback)
+        const translations = {
+            "en": {
+                nav_home: "SYSTEM MAIN",
+                doc_title: "Privacy Policy",
+                last_updated: "Last updated: January 30, 2026",
+                intro: "<strong>TERRION Games</strong> is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application <strong>\"Love Marble\"</strong>.",
+                h1: "1. Information We Collect",
+                p1: "We may collect the following types of information to provide better game services and improve user experience:",
+                li1_1: "<strong>User Provided Information:</strong> Nicknames, anniversary dates, and couple data entered voluntarily within the app.",
+                li1_2: "<strong>Device Information:</strong> Device model, OS version, language settings, and IP address for troubleshooting.",
+                li1_3: "<strong>Usage Data:</strong> Game progress, button clicks, round completion rates, and session duration.",
+                li1_4: "<strong>Transaction Data:</strong> When you make a purchase, we collect transaction details (product ID, price) to analyze sales. We do not store credit card info.",
+                h2: "2. How We Use Your Information",
+                p2: "We use the collected information for the following purposes:",
+                li2_1: "To provide, operate, and maintain the \"Love Marble\" game service.",
+                li2_2: "To calculate D-days and manage couple records locally.",
+                li2_3: "To analyze game performance, fix bugs, and improve stability.",
+                li2_4: "To measure marketing efficiency (ROAS) and ad campaign effectiveness.",
+                h3: "3. Third-Party Services",
+                p3: "We use third-party services that may collect information used to identify your device:",
+                li3_1: "<strong>Unity Analytics:</strong> For analyzing game usage and player behavior.",
+                li3_2: "<strong>Google Analytics for Firebase:</strong> For analyzing demographics and retention.",
+                li3_3: "<strong>Google Ads:</strong> For tracking ad conversions and marketing effectiveness.",
+                h4: "4. Data Sharing",
+                p4: "We do not sell, trade, or rent your personal identification information. We may share generic aggregated information with partners for the purposes outlined above.",
+                h5: "5. Children's Privacy",
+                p5: "Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13.",
+                h6: "6. Contact Us",
+                contact_msg: "If you have any questions about this Privacy Policy, please contact us:"
+            },
+            "ko": {
+                nav_home: "메인으로",
+                doc_title: "개인정보 처리방침",
+                last_updated: "최종 수정일: 2026년 1월 30일",
+                intro: "<strong>TERRION Games</strong>는 귀하의 개인정보를 소중하게 생각합니다. 본 처리방침은 귀하가 <strong>\"러브마블\"</strong> 앱을 이용할 때 저희가 정보를 수집, 사용, 보호하는 방법을 설명합니다.",
+                h1: "1. 수집하는 정보",
+                p1: "저희는 더 나은 게임 서비스와 사용자 경험 개선을 위해 다음과 같은 정보를 수집할 수 있습니다:",
+                li1_1: "<strong>사용자 제공 정보:</strong> 앱 내에서 자발적으로 입력한 닉네임, 기념일, 커플 데이터.",
+                li1_2: "<strong>기기 정보:</strong> 문제 해결을 위한 기기 모델명, OS 버전, 언어 설정, IP 주소.",
+                li1_3: "<strong>사용 데이터:</strong> 게임 진행 상황, 버튼 클릭, 라운드 완료율, 세션 시간 등.",
+                li1_4: "<strong>결제 데이터:</strong> 유료 상품 구매 시 매출 분석을 위해 거래 내역(상품 ID, 가격)을 수집합니다. *신용카드 정보는 저장하지 않으며, 구글/애플이 처리합니다.*",
+                h2: "2. 정보 사용 목적",
+                p2: "수집된 정보는 다음과 같은 목적으로 사용됩니다:",
+                li2_1: "\"러브마블\" 게임 서비스의 제공, 운영 및 유지보수.",
+                li2_2: "기념일(D-day) 계산 및 커플 기록의 로컬 관리.",
+                li2_3: "게임 성능 분석, 버그 수정 및 안정성 개선.",
+                li2_4: "마케팅 효율(ROAS) 측정 및 광고 캠페인 효과 분석.",
+                h3: "3. 제3자 서비스",
+                p3: "저희는 기기를 식별할 수 있는 정보를 수집하는 제3자 서비스를 이용합니다:",
+                li3_1: "<strong>Unity Analytics:</strong> 게임 사용성 및 플레이어 행동 분석.",
+                li3_2: "<strong>Google Analytics for Firebase:</strong> 사용자 통계 및 리텐션 분석.",
+                li3_3: "<strong>Google Ads:</strong> 광고 전환 추적 및 마케팅 효과 분석.",
+                h4: "4. 데이터 공유",
+                p4: "저희는 귀하의 개인 식별 정보를 판매, 교환, 임대하지 않습니다. 위 목적을 위해 비식별화된 통계 정보만 파트너와 공유될 수 있습니다.",
+                h5: "5. 아동의 개인정보",
+                p5: "본 서비스는 만 13세 미만 아동을 대상으로 하지 않습니다. 만 13세 미만 아동의 개인정보를 고의로 수집하지 않습니다.",
+                h6: "6. 문의하기",
+                contact_msg: "본 개인정보 처리방침에 대해 궁금한 점이 있으시면 아래로 연락해 주세요:"
+            },
+            // 다른 언어들은 UI는 번역, 본문은 영어(법적 안전성 고려)로 매핑.
+            // 인엽님이 원하시면 다음 단계에서 이 부분을 해당 언어로 채워드릴 수 있습니다.
+            "ja": { nav_home: "メイン画面", doc_title: "プライバシーポリシー", last_updated: "最終更新日: 2026年1月30日" },
+            "ch-TW": { nav_home: "系統主頁", doc_title: "隱私權政策", last_updated: "最後更新：2026年1月30日" },
+            "th": { nav_home: "หน้าหลัก", doc_title: "นโยบายความเป็นส่วนตัว", last_updated: "อัปเดตล่าสุด: 30 มกราคม 2026" },
+            "vn": { nav_home: "Trang chủ", doc_title: "Chính sách bảo mật", last_updated: "Cập nhật lần cuối: 30/01/2026" },
+            "es-ES": { nav_home: "INICIO", doc_title: "Política de Privacidad", last_updated: "Última actualización: 30 de enero de 2026" },
+            "ru": { nav_home: "ГЛАВНАЯ", doc_title: "Политика конфиденциальности", last_updated: "Обновлено: 30 января 2026" },
+            // 나머지 언어들도 영어 Fallback 로직에 의해 처리됨
+        };
+
+        const langPicker = document.getElementById('languagePicker');
+        
+        // 1. 언어 설정 함수
+        function setLanguage(lang) {
+            // 해당 언어 데이터가 없으면 영어(en)를 기본값으로 사용
+            const data = translations[lang] || translations['en'];
+            const fallbackData = translations['en']; // 번역 안 된 부분은 영어로
+
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                // 해당 언어에 키가 있으면 사용, 없으면 영어 사용
+                if (data[key]) {
+                    element.innerHTML = data[key];
+                } else {
+                    element.innerHTML = fallbackData[key];
+                }
+            });
+            
+            // 드롭다운 값 업데이트
+            langPicker.value = lang;
+            document.documentElement.lang = lang;
+        }
+
+        // 2. 자동 감지 및 초기화
+        function init() {
+            // 브라우저 언어 감지 (예: 'ko-KR' -> 'ko')
+            const userLang = navigator.language || navigator.userLanguage; 
+            let targetLang = 'en'; // 기본값
+
+            // 우리가 지원하는 16개국 코드 매핑
+            if (userLang.includes('ko')) targetLang = 'ko';
+            else if (userLang.includes('ja')) targetLang = 'ja';
+            else if (userLang.includes('zh') || userLang.includes('TW')) targetLang = 'ch-TW';
+            else if (userLang.includes('th')) targetLang = 'th';
+            else if (userLang.includes('vi')) targetLang = 'vn';
+            else if (userLang.includes('es')) targetLang = userLang.includes('MX') ? 'es-MX' : 'es-ES';
+            else if (userLang.includes('ru')) targetLang = 'ru';
+            else if (userLang.includes('fr')) targetLang = 'fr';
+            else if (userLang.includes('de')) targetLang = 'de';
+            else if (userLang.includes('pt')) targetLang = 'pt-BR';
+            else if (userLang.includes('id')) targetLang = 'id';
+            else if (userLang.includes('hi')) targetLang = 'hi';
+            else if (userLang.includes('it')) targetLang = 'it';
+            else if (userLang.includes('tr')) targetLang = 'tr';
+            
+            // 데이터에 있는 언어인지 확인 후 적용 (없으면 영어)
+            if (!translations[targetLang]) targetLang = 'en';
+            
+            setLanguage(targetLang);
+        }
+
+        // 3. 언어 변경 이벤트 리스너
+        langPicker.addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+
+        // 실행
+        init();
+    </script>
 </body>
 </html>

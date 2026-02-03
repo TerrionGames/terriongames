@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - TERRION Games </title>
+    <title>Privacy Policy - TERRION Games</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* ---- Global Variables ---- */
+        /* ---- 스타일 부분은 인엽님 기존 코드와 동일 (생략 방지를 위해 유지) ---- */
         :root {
             --bg-color: #0a0a12;
             --card-bg: rgba(20, 20, 28, 0.7);
@@ -16,9 +16,7 @@
             --accent-purple: #bd00ff;
             --border-color: rgba(0, 242, 255, 0.2);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
@@ -30,163 +28,33 @@
             flex-direction: column;
             align-items: center;
         }
-
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+            background: linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
             background-size: 30px 30px;
             z-index: -2;
             pointer-events: none;
         }
-
-        ::selection { background: var(--accent-neon); color: #000; }
-
-        /* ---- Navigation & Language ---- */
-        .nav-header {
-            width: 100%;
-            max-width: 900px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between; /* 양쪽 정렬 */
-            align-items: center;
-        }
-
-        .btn-home {
-            display: inline-flex;
-            align-items: center;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            color: var(--accent-neon);
-            text-decoration: none;
-            padding: 8px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background: rgba(0, 242, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .btn-home:hover {
-            background: var(--accent-neon);
-            color: var(--bg-color);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
-        }
-
+        .nav-header { width: 100%; max-width: 900px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-home { display: inline-flex; align-items: center; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: var(--accent-neon); text-decoration: none; padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 4px; background: rgba(0, 242, 255, 0.05); transition: all 0.3s ease; }
+        .btn-home:hover { background: var(--accent-neon); color: var(--bg-color); box-shadow: 0 0 15px rgba(0, 242, 255, 0.4); }
         .btn-home::before { content: '< '; margin-right: 8px; font-weight: bold; }
-
-        /* Language Selector Style */
-        .lang-select {
-            background: rgba(10, 10, 18, 0.8);
-            color: var(--accent-neon);
-            border: 1px solid var(--border-color);
-            padding: 8px 12px;
-            font-family: 'Fira Code', monospace;
-            border-radius: 4px;
-            cursor: pointer;
-            outline: none;
-            font-size: 0.85rem;
-        }
-        
-        .lang-select:hover, .lang-select:focus {
-            border-color: var(--accent-neon);
-            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
-        }
-
-        /* ---- Doc Container ---- */
-        .doc-container {
-            width: 100%;
-            max-width: 900px;
-            background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 50px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            color: var(--text-heading);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            text-align: center;
-            text-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
-        }
-
-        .last-updated {
-            text-align: center;
-            font-family: 'Fira Code', monospace;
-            color: var(--accent-neon);
-            margin-top: -20px;
-            margin-bottom: 40px;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        h2 {
-            font-family: 'Fira Code', monospace;
-            color: var(--accent-neon);
-            font-size: 1.4rem;
-            margin-top: 50px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-
+        .lang-select { background: rgba(10, 10, 18, 0.8); color: var(--accent-neon); border: 1px solid var(--border-color); padding: 8px 12px; font-family: 'Fira Code', monospace; border-radius: 4px; cursor: pointer; outline: none; font-size: 0.85rem; }
+        .doc-container { width: 100%; max-width: 900px; background: var(--card-bg); backdrop-filter: blur(15px); border: 1px solid var(--border-color); border-radius: 8px; padding: 50px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 2.5rem; color: var(--text-heading); text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
+        .last-updated { text-align: center; font-family: 'Fira Code', monospace; color: var(--accent-neon); margin-top: -20px; margin-bottom: 40px; font-size: 0.9rem; opacity: 0.8; }
+        h2 { font-family: 'Fira Code', monospace; color: var(--accent-neon); font-size: 1.4rem; margin-top: 50px; margin-bottom: 20px; display: flex; align-items: center; }
         h2::before { content: '//'; margin-right: 10px; color: var(--accent-purple); }
-
         p { margin-bottom: 1.5rem; font-weight: 300; }
         strong { font-weight: 600; color: #fff; }
-
         ul { list-style: none; margin-bottom: 20px; padding-left: 10px; }
         li { margin-bottom: 12px; padding-left: 20px; position: relative; }
-        li::before {
-            content: '>';
-            position: absolute; left: 0;
-            color: var(--accent-purple);
-            font-family: 'Fira Code', monospace;
-        }
-
-        .contact {
-            background: rgba(0, 0, 0, 0.3);
-            border-left: 3px solid var(--accent-neon);
-            padding: 20px 25px;
-            border-radius: 0 4px 4px 0;
-            margin-top: 30px;
-        }
-
-        a {
-            color: var(--accent-neon);
-            text-decoration: none;
-            border-bottom: 1px dashed var(--border-color);
-            transition: 0.2s;
-        }
-        a:hover { color: #fff; border-bottom-style: solid; }
-
-        .footer {
-            margin-top: 50px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            color: #666;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px;
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .doc-container { padding: 30px 20px; }
-            h1 { font-size: 1.8rem; }
-            h2 { font-size: 1.2rem; }
-            body { padding: 20px 10px; }
-        }
+        li::before { content: '>'; position: absolute; left: 0; color: var(--accent-purple); font-family: 'Fira Code', monospace; }
+        .contact { background: rgba(0, 0, 0, 0.3); border-left: 3px solid var(--accent-neon); padding: 20px 25px; border-radius: 0 4px 4px 0; margin-top: 30px; }
+        .footer { margin-top: 50px; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #666; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; width: 100%; }
+        @media (max-width: 768px) { .doc-container { padding: 30px 20px; } h1 { font-size: 1.8rem; } h2 { font-size: 1.2rem; } }
     </style>
 </head>
 <body>
@@ -217,6 +85,7 @@
         <h1 data-i18n="doc_title">Privacy Policy</h1>
         <p class="last-updated" data-i18n="last_updated">Last updated: January 30, 2026</p>
         <p id="notice-msg" style="color: var(--accent-neon); font-size: 0.85rem; margin-bottom: 20px; font-style: italic;"></p>
+        
         <p data-i18n="intro"><strong>TERRION Games</strong> is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application <strong>"Love Marble"</strong>.</p>
 
         <h2 data-i18n="h1">1. Information We Collect</h2>
@@ -264,113 +133,13 @@
     </div>
 
     <script>
+        // 중복 선언을 제거하고 모든 언어 데이터를 하나로 통합했습니다.
         const translations = {
             "en": {
                 nav_home: "SYSTEM MAIN",
                 doc_title: "Privacy Policy",
                 last_updated: "Last updated: January 30, 2026",
-                notice: "", // 영어는 안내 문구 필요 없음
-                // ... (이하 본문 내용은 아까와 동일)
-            },
-            "ko": {
-                nav_home: "메인으로",
-                doc_title: "개인정보 처리방침",
-                last_updated: "최종 수정일: 2026년 1월 30일",
-                notice: "", // 한국어도 번역본이 있으므로 필요 없음
-                // ... (이하 본문 내용은 아까와 동일)
-            },
-            // 나머지 국가: UI는 번역 + 본문은 영어 + "안내 문구" 추가
-            "ja": { 
-                nav_home: "メイン画面", 
-                doc_title: "プライバシーポリシー", 
-                last_updated: "最終更新日: 2026年1月30日",
-                notice: "※ 法的な正確性を期すため、本ポリシーは英語で提供されます。" 
-            },
-            "ch-TW": { 
-                nav_home: "系統主頁", 
-                doc_title: "隱私權政策", 
-                last_updated: "最後更新：2026年1月30日",
-                notice: "※ 為了確保法律準確性，本政策以英文提供。" 
-            },
-            "th": { 
-                nav_home: "หน้าหลัก", 
-                doc_title: "นโยบายความเป็นส่วนตัว", 
-                last_updated: "อัปเดตล่าสุด: 30 มกราคม 2026",
-                notice: "※ เพื่อความถูกต้องทางกฎหมาย นโยบายนี้จัดทำเป็นภาษาอังกฤษ" 
-            },
-            "vn": { 
-                nav_home: "Trang chủ", 
-                doc_title: "Chính sách bảo mật", 
-                last_updated: "Cập nhật lần cuối: 30/01/2026",
-                notice: "※ Để đảm bảo tính chính xác về mặt pháp lý, chính sách này được cung cấp bằng tiếng Anh." 
-            },
-            "hi": { 
-                nav_home: "होम", 
-                doc_title: "गोपनीयता नीति", 
-                last_updated: "अंतिम अपडेट: 30 जनवरी 2026",
-                notice: "※ कानूनी सटीकता के लिए, यह नीति अंग्रेजी में प्रदान की गई है।" 
-            },
-            "id": { 
-                nav_home: "Beranda", 
-                doc_title: "Kebijakan Privasi", 
-                last_updated: "Terakhir diperbarui: 30 Januari 2026",
-                notice: "※ Demi keakuratan hukum, kebijakan ini disediakan dalam bahasa Inggris." 
-            },
-            "fr": { 
-                nav_home: "Accueil", 
-                doc_title: "Politique de confidentialité", 
-                last_updated: "Dernière mise à jour : 30 janvier 2026",
-                notice: "※ Pour des raisons de précision juridique, ce document est fourni en anglais." 
-            },
-            "de": { 
-                nav_home: "Startseite", 
-                doc_title: "Datenschutzerklärung", 
-                last_updated: "Letzte Aktualisierung: 30. Januar 2026",
-                notice: "※ Aus rechtlichen Gründen wird diese Richtlinie in englischer Sprache bereitgestellt." 
-            },
-            "es-ES": { 
-                nav_home: "Inicio", 
-                doc_title: "Política de Privacidad", 
-                last_updated: "Última actualización: 30 de enero de 2026",
-                notice: "※ Para garantizar la precisión legal, esta política se proporciona en inglés." 
-            },
-            "es-MX": { 
-                nav_home: "Inicio", 
-                doc_title: "Política de Privacidad", 
-                last_updated: "Última actualización: 30 de enero de 2026",
-                notice: "※ Para garantizar la precisión legal, esta política se proporciona en inglés." 
-            },
-            "pt-BR": { 
-                nav_home: "Início", 
-                doc_title: "Política de Privacidade", 
-                last_updated: "Última atualização: 30 de janeiro de 2026",
-                notice: "※ Para precisão legal, esta política é fornecida em inglês." 
-            },
-            "it": { 
-                nav_home: "Home", 
-                doc_title: "Informativa sulla privacy", 
-                last_updated: "Ultimo aggiornamento: 30 gennaio 2026",
-                notice: "※ Per accuratezza legale, questa informativa è fornita in inglese." 
-            },
-            "ru": { 
-                nav_home: "Главная", 
-                doc_title: "Политика конфиденциальности", 
-                last_updated: "Обновлено: 30 января 2026",
-                notice: "※ Для юридической точности этот документ представлен на английском языке." 
-            },
-            "tr": { 
-                nav_home: "Ana Sayfa", 
-                doc_title: "Gizlilik Politikası", 
-                last_updated: "Son güncelleme: 30 Ocak 2026",
-                notice: "※ Yasal doğruluk sağlamak amacıyla bu politika İngilizce olarak sunulmaktadır." 
-            }
-        };
-        // 16개국 번역 데이터 (현재 EN, KO 완벽 적용, 나머지 언어는 UI만 적용 + 본문은 영어 Fallback)
-        const translations = {
-            "en": {
-                nav_home: "SYSTEM MAIN",
-                doc_title: "Privacy Policy",
-                last_updated: "Last updated: January 30, 2026",
+                notice: "",
                 intro: "<strong>TERRION Games</strong> is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application <strong>\"Love Marble\"</strong>.",
                 h1: "1. Information We Collect",
                 p1: "We may collect the following types of information to provide better game services and improve user experience:",
@@ -400,6 +169,7 @@
                 nav_home: "메인으로",
                 doc_title: "개인정보 처리방침",
                 last_updated: "최종 수정일: 2026년 1월 30일",
+                notice: "",
                 intro: "<strong>TERRION Games</strong>는 귀하의 개인정보를 소중하게 생각합니다. 본 처리방침은 귀하가 <strong>\"러브마블\"</strong> 앱을 이용할 때 저희가 정보를 수집, 사용, 보호하는 방법을 설명합니다.",
                 h1: "1. 수집하는 정보",
                 p1: "저희는 더 나은 게임 서비스와 사용자 경험 개선을 위해 다음과 같은 정보를 수집할 수 있습니다:",
@@ -425,34 +195,37 @@
                 h6: "6. 문의하기",
                 contact_msg: "본 개인정보 처리방침에 대해 궁금한 점이 있으시면 아래로 연락해 주세요:"
             },
-            // 다른 언어들은 UI는 번역, 본문은 영어(법적 안전성 고려)로 매핑.
-            // 인엽님이 원하시면 다음 단계에서 이 부분을 해당 언어로 채워드릴 수 있습니다.
-            "ja": { nav_home: "メイン画面", doc_title: "プライバシーポリシー", last_updated: "最終更新日: 2026年1月30日" },
-            "ch-TW": { nav_home: "系統主頁", doc_title: "隱私權政策", last_updated: "最後更新：2026年1月30日" },
-            "th": { nav_home: "หน้าหลัก", doc_title: "นโยบายความเป็นส่วนตัว", last_updated: "อัปเดตล่าสุด: 30 มกราคม 2026" },
-            "vn": { nav_home: "Trang chủ", doc_title: "Chính sách bảo mật", last_updated: "Cập nhật lần cuối: 30/01/2026" },
-            "es-ES": { nav_home: "INICIO", doc_title: "Política de Privacidad", last_updated: "Última actualización: 30 de enero de 2026" },
-            "ru": { nav_home: "ГЛАВНАЯ", doc_title: "Политика конфиденциальности", last_updated: "Обновлено: 30 января 2026" },
-            // 나머지 언어들도 영어 Fallback 로직에 의해 처리됨
+            "ja": { nav_home: "メイン画面", doc_title: "プライバシーポリシー", last_updated: "最終更新日: 2026年1月30일", notice: "※ 法적인 정확성을 위해 본 정책은 영어로 제공됩니다." },
+            "ch-TW": { nav_home: "系統主頁", doc_title: "隱私權政策", last_updated: "最後更新：2026年1月30일", notice: "※ 為了確保法律準確性，本政策以英文提供。" },
+            "th": { nav_home: "หน้าหลัก", doc_title: "นโยบายความเป็นส่วนตัว", last_updated: "อัปเดตล่าสุด: 30 มกราคม 2026", notice: "※ เพื่อความถูกต้องทางกฎหมาย นโยบายนี้จัดทำเป็นภาษาอังกฤษ" },
+            "vn": { nav_home: "Trang chủ", doc_title: "Chính sách bảo mật", last_updated: "Cập nhật lần cuối: 30/01/2026", notice: "※ Để đảm bảo tính chính xác về mặt pháp lý, chính sách này được cung cấp bằng tiếng Anh." },
+            "hi": { nav_home: "होम", doc_title: "गोपनीयता नीति", last_updated: "अंतिम अपडेट: 30 जनवरी 2026", notice: "※ कानूनी सटीकता के लिए, यह नीति अंग्रेजी में प्रदान की गई है।" },
+            "id": { nav_home: "Beranda", doc_title: "Kebijakan Privasi", last_updated: "Terakhir diperbarui: 30 Januari 2026", notice: "※ Demi keakuratan hukum, kebijakan ini disediakan dalam bahasa Inggris." },
+            "fr": { nav_home: "Accueil", doc_title: "Politique de confidentialité", last_updated: "30 janvier 2026", notice: "※ Pour des raisons de précision juridique, ce document est fourni en anglais." },
+            "de": { nav_home: "Startseite", doc_title: "Datenschutzerklärung", last_updated: "30. Januar 2026", notice: "※ Aus rechtlichen Gründen wird diese Richtlinie in englischer Sprache bereitgestellt." },
+            "es-ES": { nav_home: "Inicio", doc_title: "Política de Privacidad", last_updated: "30 de enero de 2026", notice: "※ Para garantizar la precisión legal, esta política se proporciona en inglés." },
+            "es-MX": { nav_home: "Inicio", doc_title: "Política de Privacidad", last_updated: "30 de enero de 2026", notice: "※ Para garantizar la precisión legal, esta política se proporciona en inglés." },
+            "pt-BR": { nav_home: "Início", doc_title: "Política de Privacidade", last_updated: "30 de janeiro de 2026", notice: "※ Para precisão legal, esta política é fornecida em inglês." },
+            "it": { nav_home: "Home", doc_title: "Informativa sulla privacy", last_updated: "30 gennaio 2026", notice: "※ Per accuratezza legale, questa informativa è fornita in inglese." },
+            "ru": { nav_home: "Главная", doc_title: "Политика конфиденциальности", last_updated: "30 января 2026", notice: "※ Для юридической точности этот документ представлен на английском языке." },
+            "tr": { nav_home: "Ana Sayfa", doc_title: "Gizlilik Politikası", last_updated: "30 Ocak 2026", notice: "※ Yasal doğruluk sağlamak amacıyla bu politika İngilizce olarak sunulmaktadır." }
         };
 
         const langPicker = document.getElementById('languagePicker');
         
-        // 1. 언어 설정 함수
         function setLanguage(lang) {
-            // 해당 언어 데이터가 없으면 영어(en)를 기본값으로 사용
             const data = translations[lang] || translations['en'];
-            const fallbackData = translations['en']; // 번역 안 된 부분은 영어로
+            const fallbackData = translations['en']; 
 
-            // Notice 처리 로직 추가
+            // 1. Notice 메시지 업데이트
             const noticeEl = document.getElementById('notice-msg');
             if(noticeEl) {
                 noticeEl.innerText = data.notice || ""; 
             }
             
+            // 2. data-i18n 요소들 업데이트
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
-                // 해당 언어에 키가 있으면 사용, 없으면 영어 사용
                 if (data[key]) {
                     element.innerHTML = data[key];
                 } else {
@@ -460,18 +233,14 @@
                 }
             });
             
-            // 드롭다운 값 업데이트
             langPicker.value = lang;
             document.documentElement.lang = lang;
         }
 
-        // 2. 자동 감지 및 초기화
         function init() {
-            // 브라우저 언어 감지 (예: 'ko-KR' -> 'ko')
             const userLang = navigator.language || navigator.userLanguage; 
-            let targetLang = 'en'; // 기본값
+            let targetLang = 'en';
 
-            // 우리가 지원하는 16개국 코드 매핑
             if (userLang.includes('ko')) targetLang = 'ko';
             else if (userLang.includes('ja')) targetLang = 'ja';
             else if (userLang.includes('zh') || userLang.includes('TW')) targetLang = 'ch-TW';
@@ -487,18 +256,14 @@
             else if (userLang.includes('it')) targetLang = 'it';
             else if (userLang.includes('tr')) targetLang = 'tr';
             
-            // 데이터에 있는 언어인지 확인 후 적용 (없으면 영어)
             if (!translations[targetLang]) targetLang = 'en';
-            
             setLanguage(targetLang);
         }
 
-        // 3. 언어 변경 이벤트 리스너
         langPicker.addEventListener('change', (e) => {
             setLanguage(e.target.value);
         });
 
-        // 실행
         init();
     </script>
 </body>

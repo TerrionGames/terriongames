@@ -3,269 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERRION Games - Mobile Game Studio</title>
+    <title>TERRION Games - Love Marble</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* ---- CSS Reset & Global Variables ---- */
+        /* (기존 CSS 변수 및 스타일 유지) */
         :root {
-            --bg-color: #0a0a12; /* 아주 깊은 남색 배경 */
-            --card-bg: rgba(255, 255, 255, 0.05); /* 반투명 유리 효과 배경 */
+            --bg-color: #0a0a12;
+            --card-bg: rgba(255, 255, 255, 0.05);
             --text-primary: #ffffff;
             --text-secondary: #a0a0b0;
-            --accent-neon: #00f2ff; /* 사이버펑크 시안색 */
-            --accent-purple: #bd00ff; /* 사이버펑크 보라색 */
+            --accent-neon: #00f2ff;
+            --accent-purple: #bd00ff;
+            --accent-pink: #ff0055; /* 러브마블용 핑크 추가 */
         }
+        /* ... (기존 body, container 등 스타일 유지) ... */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* 배경에 은은한 기술적 그리드 패턴 추가 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: -2;
-        }
-
-        /* 은은한 빛 번짐 효과 */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 50%; left: 50%;
-            width: 60vw; height: 60vh;
-            background: radial-gradient(circle, rgba(189, 0, 255, 0.15) 0%, rgba(10, 10, 18, 0) 70%);
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--accent-neon);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        a:hover {
-            color: #fff;
-            text-shadow: 0 0 10px var(--accent-neon);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-            z-index: 1;
-        }
-
-        /* ---- Hero Section (TERRION Title) ---- */
-        .hero-section {
-            margin-bottom: 60px;
-        }
-
-        h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            position: relative;
-            display: inline-block;
-            /* 네온 그라데이션 텍스트 효과 */
-            background: linear-gradient(90deg, var(--accent-neon), #fff, var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.4));
-        }
-
-        .tagline {
-            font-family: 'Fira Code', monospace; /* 기술적인 느낌의 폰트 */
-            font-size: 1.2rem;
-            color: var(--accent-neon);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .tagline strong {
-             font-weight: 500;
-        }
-
-        .description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-neon), transparent);
-            margin: 50px 0;
-            opacity: 0.3;
-        }
-
-        /* ---- Info Cards Grid System ---- */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            text-align: left;
-        }
-
-        .info-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px); /* 글래스모피즘 효과 */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* ---- Love Marble Section (New) ---- */
+        .game-showcase {
+            background: linear-gradient(145deg, rgba(255, 0, 85, 0.1), rgba(0, 0, 0, 0));
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.1);
         }
 
-        /* 카드 호버 효과 */
-        .info-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-neon);
-            box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.3);
-        }
-
-        /* 카드 호버시 빛나는 테두리 애니메이션 */
-        .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: 0.5s;
-        }
-        .info-card:hover::before {
-            left: 100%;
-        }
-
-        h3 {
-            font-family: 'Fira Code', monospace;
-            color: var(--accent-neon);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
+        .game-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
             text-transform: uppercase;
-            display: flex;
-            align-items: center;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--accent-pink);
         }
         
-        h3::before {
-            content: '>';
-            margin-right: 10px;
-            color: var(--accent-purple);
+        .game-logo span { color: var(--accent-pink); }
+
+        .game-desc {
+            font-size: 1.1rem;
+            color: #ddd;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .info-content p {
-            margin-bottom: 15px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+        .btn-group {
             display: flex;
-            align-items: center;
-        }
-        
-        /* 이모지 대신 스타일링된 라벨 사용 */
-        .label-icon {
-            display: inline-block;
-            width: 24px;
-            margin-right: 10px;
-            font-style: normal;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .privacy-link {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background: rgba(0, 242, 255, 0.1);
-            border: 1px solid var(--accent-neon);
-            border-radius: 5px;
-            font-family: 'Fira Code', monospace;
+        .btn {
+            padding: 15px 30px;
+            border-radius: 30px;
             font-weight: bold;
+            text-transform: uppercase;
             letter-spacing: 1px;
-        }
-        
-        .privacy-link:hover {
-             background: var(--accent-neon);
-             color: var(--bg-color);
-             box-shadow: 0 0 20px var(--accent-neon);
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* ---- Footer ---- */
-        .footer {
-            margin-top: 70px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            opacity: 0.7;
+        .btn-primary {
+            background: var(--accent-pink);
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 0, 85, 0.6);
         }
 
-        /* ---- Responsive Design ---- */
-        @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            .info-grid { grid-template-columns: 1fr; }
-            .container { padding: 30px 15px; }
+        .btn-outline {
+            border: 2px solid var(--accent-neon);
+            color: var(--accent-neon);
+            background: transparent;
         }
+        .btn-outline:hover {
+            background: var(--accent-neon);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--accent-neon);
+        }
+
+        /* 스토어 아이콘 (텍스트로 대체 가능) */
+        .store-icon { font-size: 1.2rem; }
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="hero-section">
             <h1>TERRION</h1>
-            <p class="tagline"><strong>Mobile Game Studio</strong></p>
-            <p class="description">Creating 'Love Marble' for couples worldwide.</p>
+            <p class="tagline">Mobile Game Studio</p>
         </div>
-        
+
         <hr>
-        
+
+        <div class="game-showcase">
+            <div class="game-logo">Love <span>Marble</span></div>
+            <p class="game-desc">
+                The ultimate board game for couples. <br>
+                Roll the dice, share the love, and explore new levels of intimacy.
+            </p>
+            
+            <div class="btn-group">
+                <a href="./lovemarble.html" class="btn btn-primary">
+                    <span>Explore Game</span>
+                </a>
+                
+                <a href="#" class="btn btn-outline">
+                    <span class="store-icon">🍎</span> App Store
+                </a>
+                <a href="#" class="btn btn-outline">
+                    <span class="store-icon">▶</span> Google Play
+                </a>
+            </div>
+        </div>
+
         <div class="info-grid">
             <div class="info-card">
                 <h3>Contact Us</h3>
-                <div class="info-content">
-                    <p><span class="label-icon">📧</span> Email: <a href="mailto:contact@terriongames.com">contact@terriongames.com</a></p>
-                    <p><span class="label-icon">🏢</span> Address: Cheonan-si, Chungcheongnam-do, Republic of Korea</p>
                 </div>
-            </div>
-
             <div class="info-card">
                 <h3>Privacy Policy</h3>
-                <div class="info-content">
-                    <p>We value your privacy. Please check our policy below.</p>
-                    <a href="./privacy.html" class="privacy-link">[ VIEW PRIVACY POLICY ]</a>
                 </div>
-            </div>
         </div>
 
         <div class="footer">
-            &copy; 2026 TERRION Games. All rights reserved.
-            <br> // SYSTEM READY_
+            &copy; 2026 TERRION Games. <br> // SYSTEM READY_
         </div>
     </div>
 </body>

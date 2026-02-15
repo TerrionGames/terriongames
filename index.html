@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TERRION Games - Mobile Game Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="apple-touch-icon" href="images/icon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         /* ========================================= */
         /* [ORIGINAL STYLE] 기존 TERRION 스타일 복원 */
@@ -341,8 +342,8 @@
                     <span>Explore Game ></span>
                 </a>
                 
-                <a href="#" class="btn btn-outline">App Store</a>
-                <a href="#" class="btn btn-outline">Google Play</a>
+                <a href="#" id="index-ios-btn" class="btn btn-outline">App Store</a>
+                <a href="#" id="index-android-btn" class="btn btn-outline">Google Play</a>
             </div>
         </div>
 
@@ -371,5 +372,33 @@
             <br> // SYSTEM READY_
         </div>
     </div>
+
+    <script>
+        // ========================================================
+        // [설정] 스토어 주소를 여기에 넣으세요! (lovemarble.html과 동일하게)
+        // ========================================================
+        const LINK_CONFIG = {
+            // 예시: "https://apps.apple.com/app/id12345678"
+            ios: "https://apps.apple.com/app/id6758433860",     
+            
+            // 예시: "https://play.google.com/store/apps/details?id=com.terrion.lovemarble"
+            android: "https://play.google.com/store/apps/details?id=com.terriongames.lovemarble"  
+        };
+
+        // ========================================================
+        // [시스템 로직]
+        // ========================================================
+        document.addEventListener("DOMContentLoaded", () => {
+            const iosBtn = document.getElementById('index-ios-btn');
+            const androidBtn = document.getElementById('index-android-btn');
+
+            if (LINK_CONFIG.ios !== "#" && iosBtn) {
+                iosBtn.href = LINK_CONFIG.ios;
+            }
+            if (LINK_CONFIG.android !== "#" && androidBtn) {
+                androidBtn.href = LINK_CONFIG.android;
+            }
+        });
+    </script>
 </body>
 </html>

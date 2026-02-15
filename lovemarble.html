@@ -24,7 +24,7 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden; /* 전체 페이지 가로 스크롤 방지 */
         }
 
         /* 배경 효과 */
@@ -52,17 +52,21 @@
             font-family: 'Fira Code', monospace;
             font-size: 0.9rem;
             transition: 0.3s;
-            overflow: hidden; /* 이미지가 튀어나가지 않게 */
+            overflow: hidden;
+            position: relative; /* 이미지 꽉 채우기용 */
         }
         .img-placeholder:hover {
             border-color: var(--accent-neon);
             color: var(--accent-neon);
         }
-        /* 실제 이미지를 넣을 때 이 태그를 사용하세요: <img src="..." class="fill-img"> */
+        
+        /* 이미지를 부모 요소에 꽉 채우는 클래스 */
         .fill-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
         }
 
         /* ---- Navigation ---- */
@@ -77,6 +81,7 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(10, 10, 18, 0.8); /* 배경색 추가 */
         }
         .nav-logo { font-weight: 900; font-size: 1.2rem; letter-spacing: 2px; }
         .back-link { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: var(--text-secondary); }
@@ -84,17 +89,16 @@
 
         /* ---- Hero Section ---- */
         .hero {
-            height: 90vh;
+            min-height: 90vh; /* 높이 최소값으로 변경 */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 100px 20px 60px; /* 상단 패딩 증가 */
             position: relative;
-            margin-top: 60px;
         }
 
-        .hero-content { z-index: 2; max-width: 800px; }
+        .hero-content { z-index: 2; max-width: 800px; width: 100%; }
 
         .game-title {
             font-size: 4rem;
@@ -108,8 +112,9 @@
         /* 메인 배너 이미지 자리 */
         .hero-banner-placeholder {
             width: 100%;
-            height: 300px; /* 원하는 높이 */
-            margin: 30px 0;
+            aspect-ratio: 16 / 9; /* 가로형 비율 고정 */
+            max-height: 400px;
+            margin: 30px auto;
         }
 
         /* ---- Feature Section ---- */
@@ -121,8 +126,21 @@
             font-size: 2.5rem;
             margin-bottom: 50px;
             text-align: center;
+            position: relative;
         }
-        .section-title span { border-bottom: 3px solid var(--accent-neon); }
+        
+        /* 밑줄 효과 */
+        .section-title span {
+             position: relative;
+        }
+        .section-title span::after {
+             content: '';
+             position: absolute;
+             bottom: -10px; left: 50%;
+             transform: translateX(-50%);
+             width: 50px; height: 3px;
+             background: var(--accent-neon);
+        }
 
         .feature-grid {
             display: grid;
@@ -141,26 +159,42 @@
         .feature-card:hover { transform: translateY(-10px); border-color: var(--accent-pink); }
 
         .feature-icon-placeholder {
-            width: 60px; height: 60px;
+            width: 70px; height: 70px; /* 크기 약간 키움 */
             border-radius: 50%;
             margin: 0 auto 20px;
+            font-size: 1.5rem; /* 아이콘 글자 크기 */
         }
 
-        /* ---- Screenshot Gallery (Horizontal Scroll) ---- */
+        /* ★★★ [핵심] 가로 스크롤 갤러리 ★★★ */
+        .gallery-wrapper {
+            position: relative;
+            width: 100vw; /* 화면 전체 너비 사용 */
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            overflow: hidden; /* 넘치는 부분 숨김 */
+        }
+
         .gallery-container {
             display: flex;
-            overflow-x: auto;
+            overflow-x: auto; /* 가로 스크롤 허용 */
             gap: 20px;
-            padding: 20px 0;
+            padding: 20px 10%; /* 좌우 여백 */
             scrollbar-width: none; /* Firefox 스크롤바 숨김 */
+            -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
+            scroll-snap-type: x mandatory; /* 스크롤 스냅 */
         }
         .gallery-container::-webkit-scrollbar { display: none; } /* Chrome 스크롤바 숨김 */
 
+        /* 스크린샷 플레이스홀더 (세로형) */
         .screenshot-placeholder {
-            min-width: 250px;
-            height: 450px; /* 모바일 화면 비율 */
-            flex-shrink: 0;
+            flex: 0 0 auto; /* 크기 고정 (줄어들지 않음) */
+            width: 280px; /* 모바일 화면에 적당한 너비 */
+            aspect-ratio: 9 / 16; /* 세로형 비율 고정 */
             border-radius: 20px;
+            scroll-snap-align: center; /* 중앙에 딱 멈추게 */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         /* ---- Download Section ---- */
@@ -168,21 +202,42 @@
             background: linear-gradient(180deg, transparent, rgba(255, 0, 85, 0.1));
             text-align: center;
             padding: 100px 20px;
+            margin-top: 50px;
         }
 
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 15px 40px;
             background: var(--accent-pink);
             color: white;
             border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 900;
+            font-size: 1.1rem;
             margin: 10px;
             box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
             transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
         }
         .btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(255, 0, 85, 0.6); }
+
+        .btn-google {
+            background: transparent;
+            border: 2px solid var(--accent-neon);
+            color: var(--accent-neon);
+            box-shadow: none;
+        }
+        .btn-google:hover {
+            background: var(--accent-neon);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--accent-neon);
+        }
+        
+        .store-icon { margin-right: 10px; font-size: 1.3rem; }
 
         /* ---- Footer ---- */
         footer {
@@ -192,27 +247,29 @@
             font-family: 'Fira Code', monospace;
             font-size: 0.8rem;
             border-top: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.2);
         }
 
         /* 모바일 대응 */
         @media (max-width: 768px) {
-            .game-title { font-size: 2.5rem; }
-            .hero-banner-placeholder { height: 200px; }
+            .game-title { font-size: 2.8rem; }
             .section { padding: 60px 5%; }
+            /* 모바일에서 갤러리 아이템 크기 약간 조절 */
+            .screenshot-placeholder { width: 240px; } 
         }
     </style>
 </head>
 <body>
 
     <nav class="nav-bar">
-        <a href="./index.html" class="back-link">&lt; BACK TO TERRION</a>
+        <a href="./index.html" class="back-link">&lt; TERRION Home</a>
         <div class="nav-logo">TERRION</div>
     </nav>
 
     <header class="hero">
         <div class="hero-content">
             <h1 class="game-title">Love <span>Marble</span></h1>
-            <p>Roll the dice. Spark the romance.</p>
+            <p style="font-size: 1.2rem; color: var(--text-secondary);">Roll the dice. Spark the romance.</p>
             
             <div class="img-placeholder hero-banner-placeholder" style="border:none;">
                 <img src="images/banner.png" class="fill-img" alt="Main Banner">
@@ -226,37 +283,49 @@
         <h2 class="section-title"><span>Game Features</span></h2>
         <div class="feature-grid">
             <div class="feature-card">
-                <div class="img-placeholder feature-icon-placeholder">[ICON]</div>
+                <div class="img-placeholder feature-icon-placeholder">🌍</div>
                 <h3>Global Support</h3>
-                <p>Fully translated into 16 languages. Play anywhere.</p>
+                <p>Fully translated into 16 languages.</p>
             </div>
             <div class="feature-card">
-                <div class="img-placeholder feature-icon-placeholder">[ICON]</div>
+                <div class="img-placeholder feature-icon-placeholder">🔒</div>
                 <h3>Private & Secure</h3>
-                <p>No servers. Your data stays on your device only.</p>
+                <p>No servers. Data stays on your device.</p>
             </div>
             <div class="feature-card">
-                <div class="img-placeholder feature-icon-placeholder">[ICON]</div>
+                <div class="img-placeholder feature-icon-placeholder">🎲</div>
                 <h3>Various Packs</h3>
                 <p>From Sweet to Spicy. Choose your mood.</p>
             </div>
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" style="padding-left:0; padding-right:0; overflow: hidden;">
         <h2 class="section-title"><span>In-Game Preview</span></h2>
-        <p style="text-align: center; margin-bottom: 20px; color: var(--text-secondary);">Swipe to explore</p>
+        <p style="text-align: center; margin-bottom: 30px; color: var(--text-secondary); font-family: 'Fira Code', monospace;">Is this your first time? Swipe left! -></p>
         
-        <div class="gallery-container">
-            <div class="img-placeholder screenshot-placeholder">[ SCREENSHOT 01 ]</div>
-            
-            <div class="img-placeholder screenshot-placeholder">[ SCREENSHOT 02 ]</div>
-            
-            <div class="img-placeholder screenshot-placeholder">[ SCREENSHOT 03 ]</div>
-            
-            <div class="img-placeholder screenshot-placeholder">[ SCREENSHOT 04 ]</div>
+        <div class="gallery-wrapper">
+            <div class="gallery-container">
+                <div class="img-placeholder screenshot-placeholder" style="border:none; background: #1a1a2e;">
+                    <span style="z-index:1">[ SCREEN 01 ]</span>
+                </div>
+                
+                <div class="img-placeholder screenshot-placeholder" style="border:none; background: #16213e;">
+                     <span style="z-index:1">[ SCREEN 02 ]</span>
+                </div>
+                
+                <div class="img-placeholder screenshot-placeholder" style="border:none; background: #0f3460;">
+                     <span style="z-index:1">[ SCREEN 03 ]</span>
+                </div>
+                
+                <div class="img-placeholder screenshot-placeholder" style="border:none; background: #533483;">
+                     <span style="z-index:1">[ SCREEN 04 ]</span>
+                </div>
 
-            <div class="img-placeholder screenshot-placeholder">[ SCREENSHOT 05 ]</div>
+                <div class="img-placeholder screenshot-placeholder" style="border:none; background: #e94560;">
+                     <span style="z-index:1">[ SCREEN 05 ]</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -264,27 +333,31 @@
         <h2 class="section-title"><span>Card Packs</span></h2>
         <div class="feature-grid">
             <div class="feature-card" style="border-color: #ff9ecd;">
-                <h3>🍭 Sweet Pack</h3>
+                <h3 style="color: #ff9ecd;">🍭 Sweet Pack</h3>
                 <p>For beginners. Light & fun questions.</p>
             </div>
             <div class="feature-card" style="border-color: #ff0055;">
-                <h3>🔥 Hot Pack</h3>
+                <h3 style="color: #ff0055;">🔥 Hot Pack</h3>
                 <p>Things are getting serious. Steamy missions.</p>
             </div>
             <div class="feature-card" style="border-color: #bd00ff;">
-                <h3>🌶️ Spicy Pack</h3>
+                <h3 style="color: #bd00ff;">🌶️ Spicy Pack</h3>
                 <p>High intensity. For brave couples only.</p>
             </div>
         </div>
     </section>
 
     <section id="download" class="download-section">
-        <h2 style="font-size: 2.5rem; margin-bottom: 30px;">Ready to Play?</h2>
-        <p style="margin-bottom: 40px; color: var(--text-secondary);">Available on iOS & Android</p>
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 900;">Ready to Play?</h2>
+        <p style="margin-bottom: 40px; color: var(--text-secondary); font-size: 1.1rem;">Available on iOS & Android</p>
         
-        <div>
-            <a href="#" class="btn">Download on App Store</a>
-            <br> <a href="#" class="btn" style="background: transparent; border: 2px solid var(--accent-neon); color: var(--accent-neon);">Get it on Google Play</a>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
+            <a href="#" class="btn">
+                <span class="store-icon">🍎</span> App Store
+            </a>
+            <a href="#" class="btn btn-google">
+                <span class="store-icon">▶</span> Google Play
+            </a>
         </div>
     </section>
 

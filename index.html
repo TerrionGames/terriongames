@@ -91,19 +91,65 @@
             margin-bottom: 60px;
         }
 
-        h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            position: relative;
-            display: inline-block;
-            background: linear-gradient(90deg, var(--accent-neon), #fff, var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.4));
-        }
+        /* ---- TERRION Main Logo Style ---- */
+
+/* 기존 h1 스타일을 이걸로 대체하세요 */
+h1.studio-logo {
+    font-size: 4.5rem;
+    font-weight: 900;
+    letter-spacing: 5px; /* 자간을 넓혀서 웅장하게 */
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+    font-style: italic; /* 속도감 */
+    
+    /* 1. 텍스트 자체는 흰색 + 외곽선 */
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.5); /* 전체적인 푸른 빛 */
+    z-index: 1;
+    }
+    
+    /* 2. 로고 뒤에 깔리는 네온 효과 (백라이트) */
+    h1.studio-logo::before {
+        content: attr(data-text); /* 텍스트를 복사해서 뒤에 깖 */
+        position: absolute;
+        left: 4px; /* 살짝 어긋나게 */
+        top: 4px;
+        width: 100%;
+        color: var(--accent-neon); /* 시안색 그림자 */
+        z-index: -1;
+        opacity: 0.7;
+        filter: blur(2px);
+    }
+    
+    h1.studio-logo::after {
+        content: attr(data-text);
+        position: absolute;
+        left: -4px;
+        top: -4px;
+        width: 100%;
+        color: var(--accent-purple); /* 보라색 그림자 */
+        z-index: -2;
+        opacity: 0.7;
+        filter: blur(2px);
+    }
+    
+    /* 3. 로고 양옆의 장식 ( [ TERRION ] 느낌 ) */
+    .logo-decoration {
+        display: inline-block;
+        color: var(--accent-neon);
+        font-weight: 300;
+        margin: 0 15px;
+        opacity: 0.8;
+        text-shadow: 0 0 10px var(--accent-neon);
+        transform: scale(1.2); /* 괄호만 좀 더 크게 */
+    }
+    
+    /* 모바일 대응 */
+    @media (max-width: 768px) {
+        h1.studio-logo { font-size: 2.8rem; letter-spacing: 2px; }
+        .logo-decoration { margin: 0 5px; }
+    }
 
         .tagline {
             font-family: 'Fira Code', monospace;
@@ -322,10 +368,13 @@
 <body>
     <div class="container">
         <div class="hero-section">
-            <h1>TERRION</h1>
-            <p class="tagline"><strong>Mobile Game Studio</strong></p>
-            <p class="description">Creating unique digital experiences for everyone.</p>
-        </div>
+    <h1 class="studio-logo" data-text="TERRION">
+        <span class="logo-decoration">&lt;</span> TERRION
+        <span class="logo-decoration">/&gt;</span> </h1>
+    
+    <p class="tagline"><strong>Mobile Game Studio</strong></p>
+    <p class="description">Creating unique digital experiences for everyone.</p>
+</div>
         
         <hr>
 

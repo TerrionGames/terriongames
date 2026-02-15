@@ -394,18 +394,36 @@
         <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 900;">Ready to Play?</h2>
         <p style="margin-bottom: 40px; color: var(--text-secondary); font-size: 1.1rem;">Available on iOS & Android</p>
         
-        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; align-items: center;">
             
-            <a href="#" id="ios-link-btn" style="display:inline-block; overflow:hidden; border-radius:10px;">
-                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1276560000" alt="Download on the App Store" style="height:60px;">
+            <a href="#" id="ios-link-btn" class="store-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
             </a>
     
-            <a href="#" id="android-link-btn" style="display:inline-block; overflow:hidden; border-radius:10px;">
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:60px;">
+            <a href="#" id="android-link-btn" class="store-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
             </a>
     
         </div>
     </section>
+
+    <style>
+        .store-btn {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            /* overflow: hidden;  <-- SVG는 자체 모양이 있어서 굳이 안 잘라도 됩니다 */
+        }
+        .store-btn:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+        }
+        
+        .store-btn img {
+            height: 60px; /* 두 버튼 높이 강제 통일 */
+            width: auto;  /* 비율 유지 */
+            display: block; /* 하단 미세한 여백 제거 */
+        }
+    </style>
 
     <footer>
         &copy; 2026 TERRION Games. <br>

@@ -6,7 +6,7 @@
     <title>Love Marble - The Ultimate Couple Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* ---- Global Variables (index.html과 동일) ---- */
+        /* ---- Global Variables ---- */
         :root {
             --bg-color: #0a0a12;
             --card-bg: rgba(255, 255, 255, 0.05);
@@ -15,6 +15,9 @@
             --accent-neon: #00f2ff;
             --accent-purple: #bd00ff;
             --accent-pink: #ff0055;
+            --accent-gold: #ffd700;
+            --accent-green: #00ff9d;
+            --accent-red: #ff3333;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,7 +27,7 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden; /* 전체 페이지 가로 스크롤 방지 */
+            overflow-x: hidden;
         }
 
         /* 배경 효과 */
@@ -40,33 +43,38 @@
 
         a { text-decoration: none; color: inherit; }
 
-        /* ---- Image Placeholders (이미지 넣을 자리) ---- */
-        .img-placeholder {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
+        /* ---- Image Styles ---- */
+        .img-container {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255, 255, 255, 0.3);
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
             overflow: hidden;
-            position: relative; /* 이미지 꽉 채우기용 */
+            position: relative;
         }
-        .img-placeholder:hover {
-            border-color: var(--accent-neon);
-            color: var(--accent-neon);
-        }
-        
-        /* 이미지를 부모 요소에 꽉 채우는 클래스 */
+
         .fill-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            opacity: 0; /* JS로 로드되면 페이드인 */
+            transition: opacity 0.5s ease;
+        }
+        
+        .fill-img.loaded {
+            opacity: 1;
+        }
+
+        /* 이미지 없을 때 보여줄 대체 텍스트 */
+        .alt-text {
             position: absolute;
-            top: 0; left: 0;
+            color: rgba(255,255,255,0.2);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            z-index: -1;
         }
 
         /* ---- Navigation ---- */
@@ -81,7 +89,7 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            background: rgba(10, 10, 18, 0.8); /* 배경색 추가 */
+            background: rgba(10, 10, 18, 0.8);
         }
         .nav-logo { font-weight: 900; font-size: 1.2rem; letter-spacing: 2px; }
         .back-link { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: var(--text-secondary); }
@@ -89,16 +97,16 @@
 
         /* ---- Hero Section ---- */
         .hero {
-            min-height: 90vh; /* 높이 최소값으로 변경 */
+            min-height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 100px 20px 60px; /* 상단 패딩 증가 */
+            padding: 100px 20px 60px;
             position: relative;
         }
 
-        .hero-content { z-index: 2; max-width: 800px; width: 100%; }
+        .hero-content { z-index: 2; max-width: 900px; width: 100%; }
 
         .game-title {
             font-size: 4rem;
@@ -109,29 +117,24 @@
         }
         .game-title span { color: var(--accent-pink); }
 
-        /* 메인 배너 이미지 자리 */
-        .hero-banner-placeholder {
+        /* 메인 배너 영역 */
+        #hero-banner-area {
             width: 100%;
-            aspect-ratio: 16 / 9; /* 가로형 비율 고정 */
-            max-height: 400px;
+            aspect-ratio: 16 / 9;
+            max-height: 450px;
             margin: 30px auto;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.2);
         }
 
         /* ---- Feature Section ---- */
-        .section {
-            padding: 80px 10%;
-        }
+        .section { padding: 80px 10%; }
         
         .section-title {
             font-size: 2.5rem;
             margin-bottom: 50px;
             text-align: center;
             position: relative;
-        }
-        
-        /* 밑줄 효과 */
-        .section-title span {
-             position: relative;
         }
         .section-title span::after {
              content: '';
@@ -144,7 +147,7 @@
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
@@ -152,49 +155,80 @@
             background: var(--card-bg);
             padding: 30px;
             border-radius: 20px;
-            text-align: center;
+            text-align: left;
             border: 1px solid rgba(255,255,255,0.05);
             transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .feature-card:hover { transform: translateY(-10px); border-color: var(--accent-pink); }
+        .feature-card:hover { transform: translateY(-5px); }
+
+        .feature-card h3 {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .feature-card .subtitle {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 10px;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
 
         .feature-icon-placeholder {
-            width: 70px; height: 70px; /* 크기 약간 키움 */
+            width: 60px; height: 60px;
             border-radius: 50%;
-            margin: 0 auto 20px;
-            font-size: 1.5rem; /* 아이콘 글자 크기 */
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+            line-height: 60px;
+            background: rgba(255,255,255,0.1);
         }
 
-        /* ★★★ [핵심] 가로 스크롤 갤러리 ★★★ */
+        /* ★★★ Horizontal Scroll Gallery (Landscape) ★★★ */
         .gallery-wrapper {
             position: relative;
-            width: 100vw; /* 화면 전체 너비 사용 */
+            width: 100vw;
             left: 50%;
             right: 50%;
             margin-left: -50vw;
             margin-right: -50vw;
-            overflow: hidden; /* 넘치는 부분 숨김 */
+            overflow: hidden;
         }
 
-        .gallery-container {
+        /* JS가 여기에 img 태그를 집어넣습니다 */
+        #screenshot-gallery {
             display: flex;
-            overflow-x: auto; /* 가로 스크롤 허용 */
+            overflow-x: auto;
             gap: 20px;
-            padding: 20px 10%; /* 좌우 여백 */
-            scrollbar-width: none; /* Firefox 스크롤바 숨김 */
-            -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
-            scroll-snap-type: x mandatory; /* 스크롤 스냅 */
+            padding: 20px 10%;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
         }
-        .gallery-container::-webkit-scrollbar { display: none; } /* Chrome 스크롤바 숨김 */
+        #screenshot-gallery::-webkit-scrollbar { display: none; }
 
-        /* 스크린샷 플레이스홀더 (세로형) */
-        .screenshot-placeholder {
-            flex: 0 0 auto; /* 크기 고정 (줄어들지 않음) */
-            width: 280px; /* 모바일 화면에 적당한 너비 */
-            aspect-ratio: 9 / 16; /* 세로형 비율 고정 */
-            border-radius: 20px;
-            scroll-snap-align: center; /* 중앙에 딱 멈추게 */
+        /* 생성될 스크린샷 아이템 스타일 */
+        .screenshot-item {
+            flex: 0 0 auto;
+            width: 480px; /* 가로형 너비 */
+            aspect-ratio: 16 / 9;
+            border-radius: 15px;
+            scroll-snap-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: #1a1a2e;
+            overflow: hidden;
+            position: relative;
         }
 
         /* ---- Download Section ---- */
@@ -239,7 +273,6 @@
         
         .store-icon { margin-right: 10px; font-size: 1.3rem; }
 
-        /* ---- Footer ---- */
         footer {
             text-align: center;
             padding: 40px;
@@ -250,12 +283,10 @@
             background: rgba(0,0,0,0.2);
         }
 
-        /* 모바일 대응 */
         @media (max-width: 768px) {
             .game-title { font-size: 2.8rem; }
             .section { padding: 60px 5%; }
-            /* 모바일에서 갤러리 아이템 크기 약간 조절 */
-            .screenshot-placeholder { width: 240px; } 
+            .screenshot-item { width: 300px; } /* 모바일용 크기 */
         }
     </style>
 </head>
@@ -271,79 +302,79 @@
             <h1 class="game-title">Love <span>Marble</span></h1>
             <p style="font-size: 1.2rem; color: var(--text-secondary);">Roll the dice. Spark the romance.</p>
             
-            <div class="img-placeholder hero-banner-placeholder" style="border:none;">
-                <img src="images/banner.png" class="fill-img" alt="Main Banner">
+            <div id="hero-banner-area" class="img-container">
+                <span class="alt-text">Main Banner Loading...</span>
             </div>
 
             <a href="#download" class="btn">Play Now</a>
         </div>
     </header>
 
-    <section class="section">
-        <h2 class="section-title"><span>Game Features</span></h2>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="img-placeholder feature-icon-placeholder">🌍</div>
-                <h3>Global Support</h3>
-                <p>Fully translated into 16 languages.</p>
-            </div>
-            <div class="feature-card">
-                <div class="img-placeholder feature-icon-placeholder">🔒</div>
-                <h3>Private & Secure</h3>
-                <p>No servers. Data stays on your device.</p>
-            </div>
-            <div class="feature-card">
-                <div class="img-placeholder feature-icon-placeholder">🎲</div>
-                <h3>Various Packs</h3>
-                <p>From Sweet to Spicy. Choose your mood.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" style="padding-left:0; padding-right:0; overflow: hidden;">
+    <section class="section" style="padding-left:0; padding-right:0;">
         <h2 class="section-title"><span>In-Game Preview</span></h2>
-        <p style="text-align: center; margin-bottom: 30px; color: var(--text-secondary); font-family: 'Fira Code', monospace;">Is this your first time? Swipe left! -></p>
+        <p style="text-align: center; margin-bottom: 30px; color: var(--text-secondary); font-family: 'Fira Code', monospace;">Swipe left to explore -></p>
         
         <div class="gallery-wrapper">
-            <div class="gallery-container">
-                <div class="img-placeholder screenshot-placeholder" style="border:none; background: #1a1a2e;">
-                    <span style="z-index:1">[ SCREEN 01 ]</span>
+            <div id="screenshot-gallery">
                 </div>
-                
-                <div class="img-placeholder screenshot-placeholder" style="border:none; background: #16213e;">
-                     <span style="z-index:1">[ SCREEN 02 ]</span>
-                </div>
-                
-                <div class="img-placeholder screenshot-placeholder" style="border:none; background: #0f3460;">
-                     <span style="z-index:1">[ SCREEN 03 ]</span>
-                </div>
-                
-                <div class="img-placeholder screenshot-placeholder" style="border:none; background: #533483;">
-                     <span style="z-index:1">[ SCREEN 04 ]</span>
-                </div>
-
-                <div class="img-placeholder screenshot-placeholder" style="border:none; background: #e94560;">
-                     <span style="z-index:1">[ SCREEN 05 ]</span>
-                </div>
-            </div>
         </div>
     </section>
 
     <section class="section">
-        <h2 class="section-title"><span>Card Packs</span></h2>
+        <h2 class="section-title"><span>Card Packs Collection</span></h2>
         <div class="feature-grid">
-            <div class="feature-card" style="border-color: #ff9ecd;">
-                <h3 style="color: #ff9ecd;">🍭 Sweet Pack</h3>
-                <p>For beginners. Light & fun questions.</p>
+            
+            <div class="feature-card" style="border-top: 3px solid #ff9ecd;">
+                <h3 style="color: #ff9ecd;">🍭 SWEET</h3>
+                <span class="subtitle">Romantic Spark</span>
+                <p>Remember that first-date flutter? Dive into sweet talk and romantic touches!</p>
             </div>
-            <div class="feature-card" style="border-color: #ff0055;">
-                <h3 style="color: #ff0055;">🔥 Hot Pack</h3>
-                <p>Things are getting serious. Steamy missions.</p>
+            <div class="feature-card" style="border-top: 3px solid #ff0055;">
+                <h3 style="color: #ff0055;">🔥 HOT</h3>
+                <span class="subtitle">Turning up the Heat</span>
+                <p>Is it getting a bit warm in here? Prepare for heart-pounding questions.</p>
             </div>
-            <div class="feature-card" style="border-color: #bd00ff;">
-                <h3 style="color: #bd00ff;">🌶️ Spicy Pack</h3>
-                <p>High intensity. For brave couples only.</p>
+            <div class="feature-card" style="border-top: 3px solid #bd00ff;">
+                <h3 style="color: #bd00ff;">🌶️ SPICY</h3>
+                <span class="subtitle">Tonight's Fantasy</span>
+                <p>There’s no sleeping tonight! Unlock your deepest desires with your partner.</p>
             </div>
+            <div class="feature-card" style="border-top: 3px solid #ffd700;">
+                <h3 style="color: #ffd700;">🍽️ FULL COURSE</h3>
+                <span class="subtitle">The Ultimate Experience</span>
+                <p>Can't decide? Why not have it all! The complete Love Marble journey.</p>
+            </div>
+            <div class="feature-card" style="border-top: 3px solid #555;">
+                <h3 style="color: #aaa;">📦 Pandora's Box</h3>
+                <span class="subtitle">Dangerous Secrets</span>
+                <p>Some truths are tempting... Dare to open the box of taboo topics?</p>
+            </div>
+            <div class="feature-card" style="border-top: 3px solid #fff;">
+                <h3 style="color: #fff;">💍 Wedding Quiz</h3>
+                <span class="subtitle">Ready for Forever</span>
+                <p>From finances to kids and values—take this realistic compatibility test!</p>
+            </div>
+            <div class="feature-card" style="border-top: 3px solid #00ff9d;">
+                <h3 style="color: #00ff9d;">🏡 Married Pack</h3>
+                <span class="subtitle">Reigniting the Spark</span>
+                <p>Break the routine and rediscover the romance! Perfect for long-time lovers.</p>
+            </div>
+            <div class="feature-card" style="border-top: 3px solid #00f2ff;">
+                <h3 style="color: #00f2ff;">✈️ Romantic Getaway</h3>
+                <span class="subtitle">Unforgettable Nights</span>
+                <p>Spice up your travel nights with romantic missions for a getaway atmosphere.</p>
+            </div>
+            <div class="feature-card" style="border-top: 3px solid #ff3333;">
+                <h3 style="color: #ff3333;">⚡ All-Action Pack</h3>
+                <span class="subtitle">Less talk, more touch!</span>
+                <p>100% dares and physical missions. Skip the small talk and get moving!</p>
+            </div>
+            <div class="feature-card" style="border-top: 3px solid #ff8800;">
+                <h3 style="color: #ff8800;">⚖️ Would You Rather</h3>
+                <span class="subtitle">Option A vs Option B?</span>
+                <p>A collection of dilemma cards. The best way to spark endless conversation.</p>
+            </div>
+
         </div>
     </section>
 
@@ -352,12 +383,8 @@
         <p style="margin-bottom: 40px; color: var(--text-secondary); font-size: 1.1rem;">Available on iOS & Android</p>
         
         <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
-            <a href="#" class="btn">
-                <span class="store-icon">🍎</span> App Store
-            </a>
-            <a href="#" class="btn btn-google">
-                <span class="store-icon">▶</span> Google Play
-            </a>
+            <a href="#" class="btn"><span class="store-icon">🍎</span> App Store</a>
+            <a href="#" class="btn btn-google"><span class="store-icon">▶</span> Google Play</a>
         </div>
     </section>
 
@@ -366,5 +393,70 @@
         Developed by In Yeob & Jihun.
     </footer>
 
+    <script>
+        // ========================================================
+        // [설정] 여기에 파일명만 적어주세요! (images 폴더 기준)
+        // ========================================================
+        const IMG_CONFIG = {
+            folder: "images/",               // 이미지 폴더명 (보통 그대로 둠)
+            
+            banner: "banner.png",           // 1. 메인 배너 파일명 (16:9 가로형)
+            
+            screenshots: [                   // 2. 스크린샷 파일명 리스트 (16:9 가로형)
+                "screen_01.jpg",
+                "screen_02.jpg",
+                "screen_03.jpg",
+                "screen_04.jpg",
+                "screen_05.jpg"
+                // 필요하면 더 추가하세요: "screen_06.jpg",
+            ]
+        };
+        // ========================================================
+
+
+        // [시스템 로직] 아래는 수정하지 않아도 됩니다.
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. 메인 배너 로드
+            const bannerArea = document.getElementById('hero-banner-area');
+            if(bannerArea && IMG_CONFIG.banner) {
+                const img = document.createElement('img');
+                img.src = IMG_CONFIG.folder + IMG_CONFIG.banner;
+                img.className = 'fill-img';
+                img.alt = "Main Game Banner";
+                img.onload = () => img.classList.add('loaded');
+                img.onerror = () => console.warn("배너 이미지를 찾을 수 없습니다:", img.src);
+                bannerArea.appendChild(img);
+            }
+
+            // 2. 스크린샷 갤러리 로드
+            const gallery = document.getElementById('screenshot-gallery');
+            if(gallery && IMG_CONFIG.screenshots.length > 0) {
+                IMG_CONFIG.screenshots.forEach((fileName, index) => {
+                    // 컨테이너 생성
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'screenshot-item';
+                    
+                    // 이미지 태그 생성
+                    const img = document.createElement('img');
+                    img.src = IMG_CONFIG.folder + fileName;
+                    img.className = 'fill-img';
+                    img.alt = `Gameplay Screenshot ${index + 1}`;
+                    img.onload = () => img.classList.add('loaded');
+                    img.onerror = () => {
+                        console.warn("스크린샷 이미지를 찾을 수 없습니다:", img.src);
+                        // 실패 시 대체 텍스트 표시
+                        const fallback = document.createElement('span');
+                        fallback.className = 'alt-text';
+                        fallback.innerText = `[ ${fileName} ]`;
+                        itemDiv.appendChild(fallback);
+                    };
+
+                    itemDiv.appendChild(img);
+                    gallery.appendChild(itemDiv);
+                });
+            }
+        });
+    </script>
 </body>
 </html>

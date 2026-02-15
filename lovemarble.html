@@ -278,6 +278,21 @@
             border-top: 1px solid rgba(255,255,255,0.05);
             background: rgba(0,0,0,0.2);
         }
+
+                /* ---- Official Store Badge Style ---- */
+        .store-badge {
+            height: 60px; /* 배지 높이 고정 (조절 가능) */
+            width: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            cursor: pointer;
+            margin: 10px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); /* 그림자 */
+        }
+        
+        .store-badge:hover {
+            transform: scale(1.05); /* 호버 시 살짝 커짐 */
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)); /* 빛나는 효과 */
+        }
     </style>
 </head>
 <body>
@@ -296,7 +311,7 @@
                 <span class="alt-text">Main Banner Loading...</span>
             </div>
 
-            <a href="#" id="hero-down-btn" class="btn">Play Now</a>
+            <a href="#download" id="hero-down-btn" class="btn">Play Now</a>
         </div>
     </header>
 
@@ -357,9 +372,16 @@
         <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 900;">Ready to Play?</h2>
         <p style="margin-bottom: 40px; color: var(--text-secondary); font-size: 1.1rem;">Available on iOS & Android</p>
         
-        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
-            <a href="#" id="ios-link-btn" class="btn"><span class="store-icon">🍎</span> App Store</a>
-            <a href="#" id="android-link-btn" class="btn btn-google"><span class="store-icon">▶</span> Google Play</a>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+            
+            <a href="#" id="ios-link-btn" style="display:inline-block; overflow:hidden; border-radius:10px;">
+                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1276560000" alt="Download on the App Store" style="height:60px;">
+            </a>
+    
+            <a href="#" id="android-link-btn" style="display:inline-block; overflow:hidden; border-radius:10px;">
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:60px;">
+            </a>
+    
         </div>
     </section>
 
@@ -419,7 +441,7 @@
             if (LINK_CONFIG.ios !== "#") {
                 if(iosBtn) iosBtn.href = LINK_CONFIG.ios;
                 // 상단 Play Now 버튼은 iOS 우선 (원하면 android로 변경 가능)
-                if(heroBtn) heroBtn.href = LINK_CONFIG.ios; 
+                //if(heroBtn) heroBtn.href = LINK_CONFIG.ios; 
             }
             if (LINK_CONFIG.android !== "#") {
                 if(androidBtn) androidBtn.href = LINK_CONFIG.android;

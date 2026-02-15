@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Love Marble - The Ultimate Couple Game</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="apple-touch-icon" href="images/icon.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         /* ---- Global Variables ---- */
         :root {
@@ -18,8 +19,6 @@
             --accent-purple: #bd00ff;
             --accent-pink: #ff0055;
             --accent-gold: #ffd700;
-            --accent-green: #00ff9d;
-            --accent-red: #ff3333;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,7 +61,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0; /* JS로 로드되면 페이드인 */
+            opacity: 0;
             transition: opacity 0.5s ease;
         }
         
@@ -70,7 +69,6 @@
             opacity: 1;
         }
 
-        /* 이미지 없을 때 보여줄 대체 텍스트 */
         .alt-text {
             position: absolute;
             color: rgba(255,255,255,0.2);
@@ -119,7 +117,6 @@
         }
         .game-title span { color: var(--accent-pink); }
 
-        /* 메인 배너 영역 */
         #hero-banner-area {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -164,66 +161,38 @@
             overflow: hidden;
         }
         .feature-card:hover { transform: translateY(-5px); }
+        .feature-card h3 { font-family: 'Fira Code', monospace; font-size: 1.4rem; margin-bottom: 10px; text-transform: uppercase; }
+        .feature-card .subtitle { font-size: 0.9rem; font-weight: bold; color: #fff; margin-bottom: 10px; display: block; opacity: 0.9; }
+        .feature-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
 
-        .feature-card h3 {
-            font-family: 'Fira Code', monospace;
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .feature-card .subtitle {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 10px;
-            display: block;
-            opacity: 0.9;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .feature-icon-placeholder {
-            width: 60px; height: 60px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            text-align: center;
-            line-height: 60px;
-            background: rgba(255,255,255,0.1);
-        }
-
-        /* ★★★ Horizontal Scroll Gallery (Landscape) ★★★ */
+        /* ★★★ Responsive Gallery (PC Arrow + Mobile Swipe) ★★★ */
         .gallery-wrapper {
             position: relative;
-            width: 100vw;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-            overflow: hidden;
+            width: 100%;
+            max-width: 1400px; /* PC에서 너무 퍼지지 않게 */
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
         }
 
-        /* JS가 여기에 img 태그를 집어넣습니다 */
+        /* 갤러리 컨테이너 */
         #screenshot-gallery {
             display: flex;
             overflow-x: auto;
             gap: 20px;
-            padding: 20px 10%;
+            padding: 20px;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
             scroll-snap-type: x mandatory;
+            scroll-behavior: smooth; /* 부드러운 스크롤 */
+            width: 100%;
         }
         #screenshot-gallery::-webkit-scrollbar { display: none; }
 
-        /* 생성될 스크린샷 아이템 스타일 */
         .screenshot-item {
             flex: 0 0 auto;
-            width: 480px; /* 가로형 너비 */
+            width: 80vw; /* 모바일 기본: 화면의 80% */
+            max-width: 600px; /* PC 최대 크기 제한 */
             aspect-ratio: 16 / 9;
             border-radius: 15px;
             scroll-snap-align: center;
@@ -232,6 +201,31 @@
             overflow: hidden;
             position: relative;
         }
+
+        /* PC용 화살표 버튼 */
+        .scroll-btn {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent-neon);
+            color: var(--accent-neon);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.3s;
+            display: none; /* 모바일에선 숨김 */
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+        }
+        .scroll-btn:hover { background: var(--accent-neon); color: black; box-shadow: 0 0 15px var(--accent-neon); }
+
+        /* PC 화면(768px 이상)일 때만 화살표 보이기 & 아이템 크기 조정 */
+        @media (min-width: 769px) {
+            .scroll-btn { display: flex; } /* PC에선 화살표 보임 */
+            .screenshot-item { width: 45%; } /* PC에선 한 번에 2개 정도 보이게 */
+        }
+
 
         /* ---- Download Section ---- */
         .download-section {
@@ -284,12 +278,6 @@
             border-top: 1px solid rgba(255,255,255,0.05);
             background: rgba(0,0,0,0.2);
         }
-
-        @media (max-width: 768px) {
-            .game-title { font-size: 2.8rem; }
-            .section { padding: 60px 5%; }
-            .screenshot-item { width: 300px; } /* 모바일용 크기 */
-        }
     </style>
 </head>
 <body>
@@ -308,75 +296,60 @@
                 <span class="alt-text">Main Banner Loading...</span>
             </div>
 
-            <a href="#download" class="btn">Play Now</a>
+            <a href="#" id="hero-down-btn" class="btn">Play Now</a>
         </div>
     </header>
 
     <section class="section" style="padding-left:0; padding-right:0;">
         <h2 class="section-title"><span>In-Game Preview</span></h2>
-        <p style="text-align: center; margin-bottom: 30px; color: var(--text-secondary); font-family: 'Fira Code', monospace;">Swipe left to explore -></p>
+        <p style="text-align: center; margin-bottom: 30px; color: var(--text-secondary); font-family: 'Fira Code', monospace;">
+            <span class="pc-msg">&lt; Click Arrows to Scroll &gt;</span>
+            <span class="mobile-msg">Swipe left to explore -></span>
+        </p>
         
         <div class="gallery-wrapper">
+            <button class="scroll-btn" onclick="scrollGallery(-1)">&#10094;</button>
+            
             <div id="screenshot-gallery">
                 </div>
+            
+            <button class="scroll-btn" onclick="scrollGallery(1)">&#10095;</button>
         </div>
     </section>
 
     <section class="section">
         <h2 class="section-title"><span>Card Packs Collection</span></h2>
         <div class="feature-grid">
-            
             <div class="feature-card" style="border-top: 3px solid #ff9ecd;">
-                <h3 style="color: #ff9ecd;">🍭 SWEET</h3>
-                <span class="subtitle">Romantic Spark</span>
-                <p>Remember that first-date flutter? Dive into sweet talk and romantic touches!</p>
+                <h3 style="color: #ff9ecd;">🍭 SWEET</h3> <span class="subtitle">Romantic Spark</span> <p>Remember that first-date flutter? Dive into sweet talk and romantic touches!</p>
             </div>
             <div class="feature-card" style="border-top: 3px solid #ff0055;">
-                <h3 style="color: #ff0055;">🔥 HOT</h3>
-                <span class="subtitle">Turning up the Heat</span>
-                <p>Is it getting a bit warm in here? Prepare for heart-pounding questions.</p>
+                <h3 style="color: #ff0055;">🔥 HOT</h3> <span class="subtitle">Turning up the Heat</span> <p>Is it getting a bit warm in here? Prepare for heart-pounding questions.</p>
             </div>
             <div class="feature-card" style="border-top: 3px solid #bd00ff;">
-                <h3 style="color: #bd00ff;">🌶️ SPICY</h3>
-                <span class="subtitle">Tonight's Fantasy</span>
-                <p>There’s no sleeping tonight! Unlock your deepest desires with your partner.</p>
+                <h3 style="color: #bd00ff;">🌶️ SPICY</h3> <span class="subtitle">Tonight's Fantasy</span> <p>There’s no sleeping tonight! Unlock your deepest desires.</p>
             </div>
-            <div class="feature-card" style="border-top: 3px solid #ffd700;">
-                <h3 style="color: #ffd700;">🍽️ FULL COURSE</h3>
-                <span class="subtitle">The Ultimate Experience</span>
-                <p>Can't decide? Why not have it all! The complete Love Marble journey.</p>
+             <div class="feature-card" style="border-top: 3px solid #ffd700;">
+                <h3 style="color: #ffd700;">🍽️ FULL COURSE</h3> <span class="subtitle">The Ultimate Experience</span> <p>Can't decide? Why not have it all! The complete Love Marble journey.</p>
             </div>
-            <div class="feature-card" style="border-top: 3px solid #555;">
-                <h3 style="color: #aaa;">📦 Pandora's Box</h3>
-                <span class="subtitle">Dangerous Secrets</span>
-                <p>Some truths are tempting... Dare to open the box of taboo topics?</p>
+             <div class="feature-card" style="border-top: 3px solid #555;">
+                <h3 style="color: #aaa;">📦 Pandora's Box</h3> <span class="subtitle">Dangerous Secrets</span> <p>Some truths are tempting... Dare to open the box of taboo topics?</p>
             </div>
-            <div class="feature-card" style="border-top: 3px solid #fff;">
-                <h3 style="color: #fff;">💍 Wedding Quiz</h3>
-                <span class="subtitle">Ready for Forever</span>
-                <p>From finances to kids and values—take this realistic compatibility test!</p>
+             <div class="feature-card" style="border-top: 3px solid #fff;">
+                <h3 style="color: #fff;">💍 Wedding Quiz</h3> <span class="subtitle">Ready for Forever</span> <p>From finances to kids and values—take this realistic compatibility test!</p>
             </div>
-            <div class="feature-card" style="border-top: 3px solid #00ff9d;">
-                <h3 style="color: #00ff9d;">🏡 Married Pack</h3>
-                <span class="subtitle">Reigniting the Spark</span>
-                <p>Break the routine and rediscover the romance! Perfect for long-time lovers.</p>
+             <div class="feature-card" style="border-top: 3px solid #00ff9d;">
+                <h3 style="color: #00ff9d;">🏡 Married Pack</h3> <span class="subtitle">Reigniting the Spark</span> <p>Break the routine and rediscover the romance!</p>
             </div>
-            <div class="feature-card" style="border-top: 3px solid #00f2ff;">
-                <h3 style="color: #00f2ff;">✈️ Romantic Getaway</h3>
-                <span class="subtitle">Unforgettable Nights</span>
-                <p>Spice up your travel nights with romantic missions for a getaway atmosphere.</p>
+             <div class="feature-card" style="border-top: 3px solid #00f2ff;">
+                <h3 style="color: #00f2ff;">✈️ Romantic Getaway</h3> <span class="subtitle">Unforgettable Nights</span> <p>Spice up your travel nights with romantic missions.</p>
             </div>
-            <div class="feature-card" style="border-top: 3px solid #ff3333;">
-                <h3 style="color: #ff3333;">⚡ All-Action Pack</h3>
-                <span class="subtitle">Less talk, more touch!</span>
-                <p>100% dares and physical missions. Skip the small talk and get moving!</p>
+             <div class="feature-card" style="border-top: 3px solid #ff3333;">
+                <h3 style="color: #ff3333;">⚡ All-Action Pack</h3> <span class="subtitle">Less talk, more touch!</span> <p>100% dares and physical missions. Skip the small talk!</p>
             </div>
-            <div class="feature-card" style="border-top: 3px solid #ff8800;">
-                <h3 style="color: #ff8800;">⚖️ Would You Rather</h3>
-                <span class="subtitle">Option A vs Option B?</span>
-                <p>A collection of dilemma cards. The best way to spark endless conversation.</p>
+             <div class="feature-card" style="border-top: 3px solid #ff8800;">
+                <h3 style="color: #ff8800;">⚖️ Would You Rather</h3> <span class="subtitle">Option A vs Option B?</span> <p>A collection of dilemma cards. Spark endless conversation.</p>
             </div>
-
         </div>
     </section>
 
@@ -385,78 +358,112 @@
         <p style="margin-bottom: 40px; color: var(--text-secondary); font-size: 1.1rem;">Available on iOS & Android</p>
         
         <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
-            <a href="#" class="btn"><span class="store-icon">🍎</span> App Store</a>
-            <a href="#" class="btn btn-google"><span class="store-icon">▶</span> Google Play</a>
+            <a href="#" id="ios-link-btn" class="btn"><span class="store-icon">🍎</span> App Store</a>
+            <a href="#" id="android-link-btn" class="btn btn-google"><span class="store-icon">▶</span> Google Play</a>
         </div>
     </section>
 
     <footer>
         &copy; 2026 TERRION Games. <br>
-        Developed by Yeob & Hun.
+        Developed by In Yeob & Jihun.
     </footer>
 
     <script>
         // ========================================================
-        // [설정] 여기에 파일명만 적어주세요! (images 폴더 기준)
+        // [1] 링크 설정: 여기에 스토어 주소를 넣으세요!
+        // ========================================================
+        const LINK_CONFIG = {
+            // 예시: "https://apps.apple.com/app/id12345678"
+            ios: "https://apps.apple.com/app/id6758433860",     
+            
+            // 예시: "https://play.google.com/store/apps/details?id=com.terrion.lovemarble"
+            android: "https://play.google.com/store/apps/details?id=com.terriongames.lovemarble"  
+        };
+
+        // ========================================================
+        // [2] 이미지 설정: 파일명을 적으세요 (images 폴더 기준)
         // ========================================================
         const IMG_CONFIG = {
-            folder: "./images/",               // 이미지 폴더명 (보통 그대로 둠)
-            
-            banner: "banner.jpg",           // 1. 메인 배너 파일명 (16:9 가로형)
-            
-            screenshots: [                   // 2. 스크린샷 파일명 리스트 (16:9 가로형)
+            folder: "./images/", 
+            banner: "banner.jpg",   
+            screenshots: [
                 "screen_01.jpg",
                 "screen_02.jpg",
                 "screen_03.jpg",
                 "screen_04.jpg",
                 "screen_05.jpg"
-                // 필요하면 더 추가하세요: "screen_06.jpg",
             ]
         };
+
+
         // ========================================================
+        // [3] 시스템 로직 (PC 스크롤 + 링크 적용)
+        // ========================================================
+        
+        // 갤러리 스크롤 함수 (화살표 버튼용)
+        function scrollGallery(direction) {
+            const gallery = document.getElementById('screenshot-gallery');
+            const scrollAmount = 400; // 한 번 클릭할 때 스크롤되는 양
+            if (gallery) {
+                gallery.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            }
+        }
 
-
-        // [시스템 로직] 아래는 수정하지 않아도 됩니다.
         document.addEventListener("DOMContentLoaded", () => {
             
-            // 1. 메인 배너 로드
+            // --- A. 링크 적용 ---
+            const iosBtn = document.getElementById('ios-link-btn');
+            const androidBtn = document.getElementById('android-link-btn');
+            const heroBtn = document.getElementById('hero-down-btn');
+
+            if (LINK_CONFIG.ios !== "#") {
+                if(iosBtn) iosBtn.href = LINK_CONFIG.ios;
+                // 상단 Play Now 버튼은 iOS 우선 (원하면 android로 변경 가능)
+                if(heroBtn) heroBtn.href = LINK_CONFIG.ios; 
+            }
+            if (LINK_CONFIG.android !== "#") {
+                if(androidBtn) androidBtn.href = LINK_CONFIG.android;
+            }
+
+            // --- B. 이미지 로드 (이전과 동일) ---
             const bannerArea = document.getElementById('hero-banner-area');
             if(bannerArea && IMG_CONFIG.banner) {
                 const img = document.createElement('img');
                 img.src = IMG_CONFIG.folder + IMG_CONFIG.banner;
                 img.className = 'fill-img';
-                img.alt = "Main Game Banner";
+                img.alt = "Main Banner";
                 img.onload = () => img.classList.add('loaded');
-                img.onerror = () => console.warn("배너 이미지를 찾을 수 없습니다:", img.src);
                 bannerArea.appendChild(img);
             }
 
-            // 2. 스크린샷 갤러리 로드
             const gallery = document.getElementById('screenshot-gallery');
             if(gallery && IMG_CONFIG.screenshots.length > 0) {
                 IMG_CONFIG.screenshots.forEach((fileName, index) => {
-                    // 컨테이너 생성
                     const itemDiv = document.createElement('div');
                     itemDiv.className = 'screenshot-item';
-                    
-                    // 이미지 태그 생성
                     const img = document.createElement('img');
                     img.src = IMG_CONFIG.folder + fileName;
                     img.className = 'fill-img';
-                    img.alt = `Gameplay Screenshot ${index + 1}`;
+                    img.alt = `Screenshot ${index + 1}`;
                     img.onload = () => img.classList.add('loaded');
                     img.onerror = () => {
-                        console.warn("스크린샷 이미지를 찾을 수 없습니다:", img.src);
-                        // 실패 시 대체 텍스트 표시
-                        const fallback = document.createElement('span');
-                        fallback.className = 'alt-text';
-                        fallback.innerText = `[ ${fileName} ]`;
-                        itemDiv.appendChild(fallback);
+                        console.warn("이미지 로드 실패:", img.src);
+                        itemDiv.innerHTML = `<span class="alt-text">[ ${fileName} Not Found ]</span>`;
                     };
-
                     itemDiv.appendChild(img);
                     gallery.appendChild(itemDiv);
                 });
+            }
+
+            // --- C. 안내 메시지 PC/Mobile 분기 ---
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const pcMsg = document.querySelector('.pc-msg');
+            const mobileMsg = document.querySelector('.mobile-msg');
+            
+            if(isMobile) {
+                if(pcMsg) pcMsg.style.display = 'none';
+            } else {
+                if(mobileMsg) mobileMsg.style.display = 'none';
             }
         });
     </script>

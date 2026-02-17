@@ -6,6 +6,16 @@
     <title>Love Marble - The Ultimate Couple Game</title>
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="apple-touch-icon" href="images/icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://terriongames.com/">
+    <meta property="og:title" content="Love Marble - The Ultimate Couple Board Game">
+    <meta property="og:description" content="Spark your romance with the ultimate board game for couples! 16 languages supported. 100% private & no server required.">
+    <meta property="og:image" content="https://terriongames.com/images/banner.jpg">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Love Marble - Spark the Romance">
+    <meta name="twitter:description" content="The best board game for couples. Roll the dice and start your journey now!">
+    <meta name="twitter:image" content="https://terriongames.com/images/og-image.jpg">
     
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -196,38 +206,46 @@
         }
         #screenshot-gallery::-webkit-scrollbar { display: none; }
 
-        /* ---- 스크린샷 아이템 스타일 (세로 고정형) ---- */
+       /* ---- 스크린샷 아이템 스타일 (2796x1290 최적화) ---- */
         .screenshot-item {
             flex: 0 0 auto;
             
-            /* [핵심] 높이는 고정, 너비는 자동 */
-            height: 337px; /* PC 기준 높이 (원하는 만큼 조절 가능) */
-            width: auto;   /* 사진 비율에 맞춰서 가로가 알아서 변함 */
+            /* [핵심] 세로 높이만 고정 (원하는 크기로 조절하세요) */
+            height: 350px; 
+            width: auto;   /* 가로는 이미지 비율에 맞춰 자동 조절 */
             
-            /* aspect-ratio 삭제! (이게 있으면 강제로 비율을 고정해버림) */
-            /* width: 600px; 삭제! (가로 고정하면 안 됨) */
+            /* 비율 관련 강제 설정 제거 */
+            aspect-ratio: auto; 
             
-            /* 나머지 스타일 유지 */
             border-radius: 15px;
             scroll-snap-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             background: #1a1a2e;
             overflow: hidden;
             position: relative;
+            margin-right: 10px; /* 아이템 간 간격 추가 */
         }
         
-        /* 이미지 태그 스타일도 확인! */
-        .screenshot-item img {
+        .fill-img {
+            /* 부모인 .screenshot-item의 높이에 꽉 맞춤 */
             height: 100%;
-            width: auto; /* 부모 너비에 맞추지 말고 원본 비율 유지 */
-            object-fit: contain; /* 잘리는 거 없이 다 보여줌 (혹은 cover) */
+            width: auto;
+            
+            /* 잘리지 않게 설정 */
+            object-fit: contain; 
+            
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
         
-        /* 모바일 대응 (작은 화면용) */
+        .fill-img.loaded {
+            opacity: 1;
+        }
+        
+        /* 모바일 대응 */
         @media (max-width: 768px) {
             .screenshot-item {
-                height: 200px; /* 모바일에서는 높이를 좀 줄여줌 */
-                width: auto;
+                height: 200px; /* 모바일에서는 높이를 조금 줄임 */
             }
         }
 

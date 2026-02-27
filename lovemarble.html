@@ -30,63 +30,54 @@
 
 
     <script>
-          document.addEventListener("DOMContentLoaded", function() {
-            // 1. 유저 기기 판별 (iPhone, iPad, iPod, Mac)
-            var isAppleDevice = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent);
-            
-            // 2. 애플 기기일 경우 구글 플레이 버튼 코드를 DOM에서 완전히 삭제
-            if (isAppleDevice) {
-              var androidBtn = document.getElementById("android-link-btn");
-              if (androidBtn) {
-                androidBtn.remove(); 
-              }
+              document.addEventListener("DOMContentLoaded", function() {
+                // 1. 유저 기기 판별 (iPhone, iPad, iPod, Mac)
+                var isAppleDevice = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent);
+                
+                // 2. 애플 기기일 경우 구글 플레이 버튼 코드를 DOM에서 완전히 삭제
+                if (isAppleDevice) {
+                  var androidBtn = document.getElementById("android-link-btn");
+                  if (androidBtn) {
+                    androidBtn.remove(); 
+                  }
+                }
+              });
+        </script>
+        <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // GA4 이벤트 전송 후 페이지를 이동시키는 안전 장치 함수
+        function sendEventAndRedirect(e, eventName, locationInfo) {
+          e.preventDefault(); // 스토어로 바로 튕겨 나가는 현상 일단 정지
+          var targetUrl = e.currentTarget.href;
+          
+          // GA4로 클릭 데이터 발사
+          gtag('event', eventName, { 
+            'app_name': 'lovemarble',
+            'button_location': locationInfo
+          });
+    
+          // 0.3초(300ms) 뒤에 실제 스토어 링크로 이동 (데이터 쏠 시간 벌기)
+          setTimeout(function() {
+            if(targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript')) {
+              window.location.href = targetUrl;
             }
-          });
-    </script>
-    <script>
-      // 1. 인덱스 페이지 - 앱스토어
-      var indexIosBtn = document.getElementById('index-ios-btn');
-      if(indexIosBtn) {
-        indexIosBtn.addEventListener('click', function() {
-          gtag('event', 'click_appstore', { 
-            'app_name': 'lovemarble',
-            'button_location': 'index_page' 
-          });
-        });
-      }
+          }, 300);
+        }
     
-      // 2. 인덱스 페이지 - 구글플레이
-      var indexAndroidBtn = document.getElementById('index-android-btn');
-      if(indexAndroidBtn) {
-        indexAndroidBtn.addEventListener('click', function() {
-          gtag('event', 'click_googleplay', { 
-            'app_name': 'lovemarble',
-            'button_location': 'index_page' 
-          });
-        });
-      }
+        // 1. 인덱스 페이지 버튼 세팅
+        var indexIosBtn = document.getElementById('index-ios-btn');
+        if(indexIosBtn) indexIosBtn.addEventListener('click', function(e) { sendEventAndRedirect(e, 'click_appstore', 'index_page'); });
     
-      // 3. 상세 페이지 - 앱스토어
-      var detailIosBtn = document.getElementById('ios-link-btn');
-      if(detailIosBtn) {
-        detailIosBtn.addEventListener('click', function() {
-          gtag('event', 'click_appstore', { 
-            'app_name': 'lovemarble',
-            'button_location': 'detail_page' 
-          });
-        });
-      }
+        var indexAndroidBtn = document.getElementById('index-android-btn');
+        if(indexAndroidBtn) indexAndroidBtn.addEventListener('click', function(e) { sendEventAndRedirect(e, 'click_googleplay', 'index_page'); });
     
-      // 4. 상세 페이지 - 구글플레이
-      var detailAndroidBtn = document.getElementById('android-link-btn');
-      if(detailAndroidBtn) {
-        detailAndroidBtn.addEventListener('click', function() {
-          gtag('event', 'click_googleplay', { 
-            'app_name': 'lovemarble',
-            'button_location': 'detail_page' 
-          });
-        });
-      }
+        // 2. 상세 페이지 버튼 세팅
+        var detailIosBtn = document.getElementById('ios-link-btn');
+        if(detailIosBtn) detailIosBtn.addEventListener('click', function(e) { sendEventAndRedirect(e, 'click_appstore', 'detail_page'); });
+    
+        var detailAndroidBtn = document.getElementById('android-link-btn');
+        if(detailAndroidBtn) detailAndroidBtn.addEventListener('click', function(e) { sendEventAndRedirect(e, 'click_googleplay', 'detail_page'); });
+      });
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>

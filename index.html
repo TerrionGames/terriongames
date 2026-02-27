@@ -239,8 +239,24 @@ h1.studio-logo {
     
     /* 모바일 대응 */
     @media (max-width: 768px) {
-        h1.studio-logo { font-size: 2.8rem; letter-spacing: 2px; }
-        .logo-decoration { margin: 0 5px; }
+        /* 로고 3개 요소(<, TERRION, />)를 감싸는 부모 div (클래스명은 실제에 맞게 수정) */
+        .logo-container { 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap; /* [핵심] 텍스트 줄바꿈 원천 차단 */
+        }
+    
+        /* 폰트 크기가 너무 크면 nowrap 때문에 화면 밖으로 짤리므로 2.8 -> 2.2로 약간 축소 */
+        h1.studio-logo { 
+            font-size: 2.2rem; 
+            letter-spacing: 1px; 
+        }
+        
+        .logo-decoration { 
+            margin: 0 4px; 
+            transform: scale(1.0); /* 장식 크기도 살짝 줄임 */
+        }
     }
 
         .tagline {

@@ -50,20 +50,42 @@
     </script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        // 1. 유저 기기 판별 (iPhone, iPad, iPod, Mac)
-        var isAppleDevice = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent);
-        
-        // 2. 애플 기기일 경우 구글 플레이 버튼 코드를 DOM에서 완전히 삭제
-        if (isAppleDevice) {
-          var androidBtn = document.getElementById("index-android-btn");
-          if (androidBtn) {
-            androidBtn.remove(); 
-          }
-        }
-      });
-</script>
+          document.addEventListener("DOMContentLoaded", function() {
+            // 1. 유저 기기 판별 (iPhone, iPad, iPod, Mac)
+            var isAppleDevice = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent);
+            
+            // 2. 애플 기기일 경우 구글 플레이 버튼 코드를 DOM에서 완전히 삭제
+            if (isAppleDevice) {
+              var androidBtn = document.getElementById("index-android-btn");
+              if (androidBtn) {
+                androidBtn.remove(); 
+              }
+            }
+          });
+    </script>
+    <script>
+      // 앱스토어 버튼 클릭 추적
+      var iosBtn = document.getElementById('index-ios-btn');
+      if(iosBtn) {
+        iosBtn.addEventListener('click', function() {
+          gtag('event', 'click_appstore', {
+            'app_name': 'lovemarble',
+            'button_location': 'main_page'
+          });
+        });
+      }
     
+      // 구글플레이 버튼 클릭 추적
+      var androidBtn = document.getElementById('index-android-btn');
+      if(androidBtn) {
+        androidBtn.addEventListener('click', function() {
+          gtag('event', 'click_googleplay', {
+            'app_name': 'lovemarble',
+            'button_location': 'main_page'
+          });
+        });
+      }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         /* ========================================= */

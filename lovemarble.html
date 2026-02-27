@@ -239,7 +239,8 @@
         /* 모바일 대응 */
         @media (max-width: 768px) {
             .screenshot-item {
-                height: 200px;
+                width: 85vw; /* 모바일 화면 가로 넓이의 85%만 차지하게 강제 (절대 안 짤림) */
+                height: auto; /* 높이는 2796:1290 비율에 맞춰서 브라우저가 알아서 줄임 */
             }
         }
 

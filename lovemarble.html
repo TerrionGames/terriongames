@@ -224,13 +224,12 @@
         }
         #screenshot-gallery::-webkit-scrollbar { display: none; }
         
-        /* ---- 스크린샷 아이템 스타일 (2796x1290 최적화) ---- */
+       /* ---- 스크린샷 아이템 스타일 ---- */
         .screenshot-item {
             flex: 0 0 auto;
             height: 350px; 
             
-            /* [핵심] 원본 해상도 비율을 강제해서 로딩 전/후 너비 찌그러짐 방지 */
-            aspect-ratio: 2796 / 1290; 
+            /* 부모 컨테이너에서 강제로 비율 잡던 것 삭제 (액자 역할만 하도록) */
             
             border-radius: 15px;
             scroll-snap-align: center;
@@ -238,16 +237,19 @@
             background: #1a1a2e;
             overflow: hidden;
             position: relative;
-            /* margin-right: 10px; 삭제 (부모의 gap: 20px과 충돌하여 스크롤 오차 유발함) */
         }
         
         .fill-img {
-            /* 부모 비율이 이미 완벽하므로 100%로 꽉 채움 */
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* contain 대신 cover를 써야 여백 없이 깔끔하게 떨어짐 */
+            /* 높이는 부모(350px)에 무조건 맞춤 */
+            height: 100%; 
             
-            display: block; /* 이미지 하단 미세 여백 제거 */
+            /* [핵심] 가로 길이는 짤림 없이 원본 비율대로 알아서 늘어나게 둠 */
+            width: auto; 
+            
+            /* 로딩 전에 레이아웃 찌그러지는 것 방지용 */
+            aspect-ratio: 2796 / 1290; 
+            
+            display: block; 
             opacity: 0;
             transition: opacity 0.5s ease;
         }

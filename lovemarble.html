@@ -18,6 +18,22 @@
     <meta name="twitter:title" content="Love Marble - Spark the Romance">
     <meta name="twitter:description" content="The best board game for couples. Roll the dice and start your journey now!">
     <meta name="twitter:image" content="https://terriongames.com/images/og-image.jpg">
+
+
+    <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            // 1. 유저 기기 판별 (iPhone, iPad, iPod, Mac)
+            var isAppleDevice = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent);
+            
+            // 2. 애플 기기일 경우 구글 플레이 버튼 코드를 DOM에서 완전히 삭제
+            if (isAppleDevice) {
+              var androidBtn = document.getElementById("android-link-btn");
+              if (androidBtn) {
+                androidBtn.remove(); 
+              }
+            }
+          });
+    </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>

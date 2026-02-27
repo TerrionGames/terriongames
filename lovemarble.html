@@ -85,24 +85,7 @@
             position: relative;
         }
 
-            /* ---- 이미지 채우기 스타일 (수정됨) ---- */
-        .fill-img {
-            width: 100%;
-            height: 100%;
-            
-            /* [수정 전] cover: 꽉 채우되 넘치면 자름 */
-            /* object-fit: cover; */
-            
-            /* [수정 후] contain: 비율 유지하며 다 보여줌 (여백 생길 수 있음) */
-            object-fit: contain;
-            
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        .fill-img.loaded {
-            opacity: 1;
-        }
+          
 
         .alt-text {
             position: absolute;
@@ -224,13 +207,12 @@
         }
         #screenshot-gallery::-webkit-scrollbar { display: none; }
         
-       /* ---- 스크린샷 아이템 스타일 ---- */
+       /* ---- 스크린샷 아이템 (부모 틀) ---- */
         .screenshot-item {
             flex: 0 0 auto;
             height: 350px; 
-            
-            /* 부모 컨테이너에서 강제로 비율 잡던 것 삭제 (액자 역할만 하도록) */
-            
+            /* [핵심] 여기서 2796:1290 비율을 미리 잡아줌 (브라우저 계산 오류 및 잘림 원천 차단) */
+            aspect-ratio: 2796 / 1290; 
             border-radius: 15px;
             scroll-snap-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -239,17 +221,13 @@
             position: relative;
         }
         
+        /* ---- 이미지 채우기 (중복 코드 싹 지우고 딱 하나만 남길 것) ---- */
         .fill-img {
-            /* 높이는 부모(350px)에 무조건 맞춤 */
-            height: 100%; 
-            
-            /* [핵심] 가로 길이는 짤림 없이 원본 비율대로 알아서 늘어나게 둠 */
-            width: auto; 
-            
-            /* 로딩 전에 레이아웃 찌그러지는 것 방지용 */
-            aspect-ratio: 2796 / 1290; 
-            
-            display: block; 
+            width: 100%;
+            height: 100%;
+            /* 부모 틀 안에서 절대 잘리지 않고 원본 비율 맞춰서 들어감 */
+            object-fit: contain; 
+            display: block;
             opacity: 0;
             transition: opacity 0.5s ease;
         }

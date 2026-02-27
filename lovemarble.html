@@ -214,26 +214,23 @@
         #screenshot-gallery {
             display: flex;
             overflow-x: auto;
-            gap: 20px;
+            gap: 20px; /* 아이템 간격은 여기서만 컨트롤 */
             padding: 20px;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
             scroll-snap-type: x mandatory;
-            scroll-behavior: smooth; /* 부드러운 스크롤 */
+            scroll-behavior: smooth;
             width: 100%;
         }
         #screenshot-gallery::-webkit-scrollbar { display: none; }
-
-       /* ---- 스크린샷 아이템 스타일 (2796x1290 최적화) ---- */
+        
+        /* ---- 스크린샷 아이템 스타일 (2796x1290 최적화) ---- */
         .screenshot-item {
             flex: 0 0 auto;
-            
-            /* [핵심] 세로 높이만 고정 (원하는 크기로 조절하세요) */
             height: 350px; 
-            width: auto;   /* 가로는 이미지 비율에 맞춰 자동 조절 */
             
-            /* 비율 관련 강제 설정 제거 */
-            aspect-ratio: auto; 
+            /* [핵심] 원본 해상도 비율을 강제해서 로딩 전/후 너비 찌그러짐 방지 */
+            aspect-ratio: 2796 / 1290; 
             
             border-radius: 15px;
             scroll-snap-align: center;
@@ -241,17 +238,16 @@
             background: #1a1a2e;
             overflow: hidden;
             position: relative;
-            margin-right: 10px; /* 아이템 간 간격 추가 */
+            /* margin-right: 10px; 삭제 (부모의 gap: 20px과 충돌하여 스크롤 오차 유발함) */
         }
         
         .fill-img {
-            /* 부모인 .screenshot-item의 높이에 꽉 맞춤 */
+            /* 부모 비율이 이미 완벽하므로 100%로 꽉 채움 */
+            width: 100%;
             height: 100%;
-            width: auto;
+            object-fit: cover; /* contain 대신 cover를 써야 여백 없이 깔끔하게 떨어짐 */
             
-            /* 잘리지 않게 설정 */
-            object-fit: contain; 
-            
+            display: block; /* 이미지 하단 미세 여백 제거 */
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -263,7 +259,7 @@
         /* 모바일 대응 */
         @media (max-width: 768px) {
             .screenshot-item {
-                height: 200px; /* 모바일에서는 높이를 조금 줄임 */
+                height: 200px;
             }
         }
 

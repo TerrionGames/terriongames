@@ -31,21 +31,26 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "LoveMarble",
-      "operatingSystem": "iOS, Android",
-      "applicationCategory": "GameApplication",
-      "genre": "Board Game",
-      "offers": {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "LoveMarble",
+    "operatingSystem": "iOS, Android",
+    "applicationCategory": "GameApplication",
+    "genre": "Board Game",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Terrion Games"  // 👈 개발사 이름 추가!
+    },
+    "image": "https://terriongames.com/assets/logo.png", // 👈 게임 로고나 썸네일 URL 필수 추가!
+    "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD",
         "description": "Base game (Sweet Pack) is 100% free. Premium expansion packs and Lifetime Free Pass ($9.9) available via in-app purchase."
-      },
-      "description": "A local, offline couple board game played by two people on one device. Roll the dice, land on cards, and complete romantic missions and questions. No server connection required.",
-      "inLanguage": ["en", "ko", "ja", "zh-TW", "de", "fr", "es-ES", "es-MX", "pt-BR", "hi", "id", "it", "ru", "tr", "vi", "th"],
-      "url": "https://terriongames.com/lovemarble.html"
+    },
+    "description": "A local, offline couple board game played by two people on one device. Roll the dice, land on cards, and complete romantic missions and questions. No server connection required.",
+    "inLanguage": ["en", "ko", "ja", "zh-TW", "de", "fr", "es-ES", "es-MX", "pt-BR", "hi", "id", "it", "ru", "tr", "vi", "th"],
+    "url": "https://terriongames.com/lovemarble.html"
     }
     </script>
 

@@ -495,7 +495,7 @@ h1.studio-logo {
             </p>
             
             <div class="btn-group">
-                <a href="./lovemarble.html" class="btn btn-primary">
+                <a href="./lovemarble.html" id="exploreBtn" class="btn btn-primary">
                     <span>Explore Game ></span>
                 </a>
                 
@@ -567,6 +567,53 @@ h1.studio-logo {
                 androidBtn.href = LINK_CONFIG.android;
             }
         });
+
+        // 1. 유저의 브라우저 언어 전체 가져오기 (예: 'ko-KR', 'es-MX', 'es-ES')
+        let fullLang = navigator.language; 
+        // 2. 앞 2글자만 자른 버전 (예: 'ko', 'es')
+        let shortLang = fullLang.substring(0, 2); 
+
+        // 3. 최종적으로 이동할 파일명 꼬리표
+        let targetLang = "";
+
+        // 🌟 [핵심] 국가별 디테일 분기 처리 🌟
+        if (shortLang === 'es') {
+            // 중남미, 멕시코, 미국식 스페인어 -> es-MX 로 연결
+            if (fullLang === 'es-MX' || fullLang === 'es-US' || fullLang === 'es-419' || fullLang === 'es-AR') {
+                targetLang = 'es-MX';
+            } else {
+                // 스페인 본토 및 기타 -> es-ES 로 연결
+                targetLang = 'es-ES';
+            }
+        } 
+        else if (shortLang === 'pt') {
+            // 포르투갈어는 브라질식(pt-BR)으로 통일해서 번역했으므로
+            targetLang = 'pt-BR'; 
+        }
+        else if (shortLang === 'zh') {
+            // (참고) 중국어 번체/간체 구분
+            if (fullLang === 'zh-TW' || fullLang === 'zh-HK') {
+                targetLang = 'ch-TW'; // 아까 엑셀에서 쓰신 ch-TW 에 맞춤
+            } else {
+                targetLang = 'zh-CN';
+            }
+        }
+        else {
+            // 한국어(ko-KR), 일본어(ja-JP) 등 나머지는 깔끔하게 앞 2글자만 씀
+            targetLang = shortLang; 
+        }
+
+        // 4. 대표님이 실제로 만들어둔 파일 목록 (여기에 있는 것만 연결)
+        const supportedLangs = [
+            'ko', 'ja', 'th', 'vi', 'hi', 'id', 'fr', 'de', 
+            'es-ES', 'es-MX', 'pt-BR', 'it', 'ru', 'tr', 'ch-TW', 'zh-CN'
+        ];
+
+        // 5. 해당 언어가 목록에 있으면 링크 바꿔치기!
+        let exploreBtn = document.getElementById("exploreBtn");
+        if (exploreBtn && supportedLangs.includes(targetLang) && shortLang !== 'en') {
+            exploreBtn.href = `./lovemarble_${targetLang}.html`;
+        }
     </script>
 </body>
 </html>

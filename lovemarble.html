@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/lovemarble.css">
+    <link rel="canonical" href="https://terriongames.com/lovemarble.html">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CR1631KVER"></script>
     <script>
@@ -10,8 +18,6 @@
     
       gtag('config', 'G-CR1631KVER');
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Love Marble - The Ultimate Couple Game</title>
     <meta name="description" content="An offline couple board game for 2 players on 1 device. Roll the dice, complete sweet missions, and build intimacy. Available on App Store and Google Play.">
     
@@ -46,63 +52,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Love Marble - Spark the Romance">
     <meta name="twitter:description" content="The best board game for couples. Roll the dice and start your journey now!">
-    <meta name="twitter:image" content="https://terriongames.com/images/og-image.jpg">
+    <meta name="twitter:image" content="https://terriongames.com/images/banner.jpg">
 
 
-    <script>
-              document.addEventListener("DOMContentLoaded", function() {
-                // 1. 유저 기기 판별 (iPhone, iPad, iPod, Mac)
-                var isAppleDevice = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent);
-                
-                // 2. 애플 기기일 경우 구글 플레이 버튼 코드를 DOM에서 완전히 삭제
-                if (isAppleDevice) {
-                  var androidBtn = document.getElementById("android-link-btn");
-                  if (androidBtn) {
-                    androidBtn.remove(); 
-                  }
-                }
-              });
-        </script>
-        <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // GA4 이벤트 전송 후 페이지를 이동시키는 안전 장치 함수
-        function sendEventAndRedirect(e, eventName, locationInfo) {
-          e.preventDefault(); // 스토어로 바로 튕겨 나가는 현상 일단 정지
-          var targetUrl = e.currentTarget.href;
-          
-          // GA4로 클릭 데이터 발사
-          gtag('event', eventName, { 
-            'app_name': 'lovemarble',
-            'button_location': locationInfo
-          });
-    
-          // 0.3초(300ms) 뒤에 실제 스토어 링크로 이동 (데이터 쏠 시간 벌기)
-          setTimeout(function() {
-            if(targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript')) {
-              window.location.href = targetUrl;
-            }
-          }, 300);
-        }
-    
-        // 1. 인덱스 페이지 버튼 세팅
-        var indexIosBtn = document.getElementById('index-ios-btn');
-        if(indexIosBtn) indexIosBtn.addEventListener('click', function(e) { sendEventAndRedirect(e, 'click_appstore', 'index_page'); });
-    
-        var indexAndroidBtn = document.getElementById('index-android-btn');
-        if(indexAndroidBtn) indexAndroidBtn.addEventListener('click', function(e) { sendEventAndRedirect(e, 'click_googleplay', 'index_page'); });
-    
-        // 2. 상세 페이지 버튼 세팅
-        var detailIosBtn = document.getElementById('ios-link-btn');
-        if(detailIosBtn) detailIosBtn.addEventListener('click', function(e) { sendEventAndRedirect(e, 'click_appstore', 'detail_page'); });
-    
-        var detailAndroidBtn = document.getElementById('android-link-btn');
-        if(detailAndroidBtn) detailAndroidBtn.addEventListener('click', function(e) { sendEventAndRedirect(e, 'click_googleplay', 'detail_page'); });
-      });
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="./css/lovemarble.css">
-    
     
 </head>
 <body>
@@ -219,6 +171,41 @@
     </footer>
 
     <script>
+    (function(){
+        // 1. 유저 기기 판별 (iPhone, iPad, iPod, Mac)
+        var isAppleDevice = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent);
+        if (isAppleDevice) {
+            var androidBtn = document.getElementById("android-link-btn");
+            if (androidBtn) androidBtn.remove();
+        }
+
+        // GA4 이벤트 전송 후 페이지를 이동시키는 안전 장치 함수
+        function sendEventAndRedirect(e, eventName, locationInfo) {
+            e.preventDefault();
+            var targetUrl = e.currentTarget.href;
+            if (typeof gtag === 'function') {
+                gtag('event', eventName, {
+                    'app_name': 'lovemarble',
+                    'button_location': locationInfo
+                });
+            }
+            setTimeout(function() {
+                if(targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript')) {
+                    window.location.href = targetUrl;
+                }
+            }, 300);
+        }
+
+        function bind(id, eventName, locationInfo) {
+            var el = document.getElementById(id);
+            if (el) el.addEventListener('click', function(e){ sendEventAndRedirect(e, eventName, locationInfo); });
+        }
+
+        bind('index-ios-btn','click_appstore','index_page');
+        bind('index-android-btn','click_googleplay','index_page');
+        bind('ios-link-btn','click_appstore','detail_page');
+        bind('android-link-btn','click_googleplay','detail_page');
+    })();
         // ========================================================
         // [1] 링크 설정: 여기에 스토어 주소를 넣으세요!
         // ========================================================

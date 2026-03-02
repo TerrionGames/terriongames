@@ -1,300 +1,299 @@
-<style>
-        /* ---- Global Variables ---- */
-        :root {
-            --bg-color: #0a0a12;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
-            --accent-neon: #00f2ff;
-            --accent-purple: #bd00ff;
-            --accent-pink: #ff0055;
-            --accent-gold: #ffd700;
-        }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* ---- Global Variables ---- */
+:root {
+    --bg-color: #0a0a12;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0b0;
+    --accent-neon: #00f2ff;
+    --accent-purple: #bd00ff;
+    --accent-pink: #ff0055;
+    --accent-gold: #ffd700;
+}
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* 배경 효과 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 0, 85, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(0, 242, 255, 0.08) 0%, transparent 50%);
-            z-index: -2;
-        }
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-        a { text-decoration: none; color: inherit; }
+/* 배경 효과 */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 0, 85, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(0, 242, 255, 0.08) 0%, transparent 50%);
+    z-index: -2;
+}
 
-        /* ---- Image Styles ---- */
-        .img-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-        }
+a { text-decoration: none; color: inherit; }
 
-          
+/* ---- Image Styles ---- */
+.img-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
 
-        .alt-text {
-            position: absolute;
-            color: rgba(255,255,255,0.2);
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            z-index: -1;
-        }
+    
 
-        /* ---- Navigation ---- */
-        .nav-bar {
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            background: rgba(10, 10, 18, 0.8);
-        }
-        .nav-logo { font-weight: 900; font-size: 1.2rem; letter-spacing: 2px; }
-        .back-link { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: var(--text-secondary); }
-        .back-link:hover { color: var(--accent-neon); }
+.alt-text {
+    position: absolute;
+    color: rgba(255,255,255,0.2);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    z-index: -1;
+}
 
-        /* ---- Hero Section ---- */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 100px 20px 60px;
-            position: relative;
-        }
+/* ---- Navigation ---- */
+.nav-bar {
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: rgba(10, 10, 18, 0.8);
+}
+.nav-logo { font-weight: 900; font-size: 1.2rem; letter-spacing: 2px; }
+.back-link { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: var(--text-secondary); }
+.back-link:hover { color: var(--accent-neon); }
 
-        .hero-content { z-index: 2; max-width: 900px; width: 100%; }
+/* ---- Hero Section ---- */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px 60px;
+    position: relative;
+}
 
-        .game-title {
-            font-size: 4rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
-        }
-        .game-title span { color: var(--accent-pink); }
+.hero-content { z-index: 2; max-width: 900px; width: 100%; }
 
-        #hero-banner-area {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            max-height: 450px;
-            margin: 30px auto;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(255, 0, 85, 0.2);
-        }
+.game-title {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+}
+.game-title span { color: var(--accent-pink); }
 
-        /* ---- Feature Section ---- */
-        .section { padding: 80px 10%; }
-        
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            text-align: center;
-            position: relative;
-        }
-        .section-title span::after {
-             content: '';
-             position: absolute;
-             bottom: -10px; left: 50%;
-             transform: translateX(-50%);
-             width: 50px; height: 3px;
-             background: var(--accent-neon);
-        }
+#hero-banner-area {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 450px;
+    margin: 30px auto;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 0, 85, 0.2);
+}
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+/* ---- Feature Section ---- */
+.section { padding: 80px 10%; }
 
-        .feature-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: left;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .feature-card:hover { transform: translateY(-5px); }
-        .feature-card h3 { font-family: 'Fira Code', monospace; font-size: 1.4rem; margin-bottom: 10px; text-transform: uppercase; }
-        .feature-card .subtitle { font-size: 0.9rem; font-weight: bold; color: #fff; margin-bottom: 10px; display: block; opacity: 0.9; }
-        .feature-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+}
+.section-title span::after {
+        content: '';
+        position: absolute;
+        bottom: -10px; left: 50%;
+        transform: translateX(-50%);
+        width: 50px; height: 3px;
+        background: var(--accent-neon);
+}
 
-        /* ★★★ Responsive Gallery (PC Arrow + Mobile Swipe) ★★★ */
-        .gallery-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 1400px; /* PC에서 너무 퍼지지 않게 */
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-        }
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
 
-        /* 갤러리 컨테이너 */
-        #screenshot-gallery {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px; /* 아이템 간격은 여기서만 컨트롤 */
-            padding: 20px;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            width: 100%;
-        }
-        #screenshot-gallery::-webkit-scrollbar { display: none; }
-        
-       /* ---- 스크린샷 아이템 (부모 틀) ---- */
-        .screenshot-item {
-            flex: 0 0 auto;
-            height: 350px; 
-            /* [핵심] 여기서 2796:1290 비율을 미리 잡아줌 (브라우저 계산 오류 및 잘림 원천 차단) */
-            aspect-ratio: 2796 / 1290; 
-            border-radius: 15px;
-            scroll-snap-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            background: #1a1a2e;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        /* ---- 이미지 채우기 (중복 코드 싹 지우고 딱 하나만 남길 것) ---- */
-        .fill-img {
-            width: 100%;
-            height: 100%;
-            /* 부모 틀 안에서 절대 잘리지 않고 원본 비율 맞춰서 들어감 */
-            object-fit: contain; 
-            display: block;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        .fill-img.loaded {
-            opacity: 1;
-        }
-        
-        /* 모바일 대응 */
-        @media (max-width: 768px) {
-            .screenshot-item {
-                width: 85vw; /* 모바일 화면 가로 넓이의 85%만 차지하게 강제 (절대 안 짤림) */
-                height: auto; /* 높이는 2796:1290 비율에 맞춰서 브라우저가 알아서 줄임 */
-            }
-        }
+.feature-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: left;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+.feature-card:hover { transform: translateY(-5px); }
+.feature-card h3 { font-family: 'Fira Code', monospace; font-size: 1.4rem; margin-bottom: 10px; text-transform: uppercase; }
+.feature-card .subtitle { font-size: 0.9rem; font-weight: bold; color: #fff; margin-bottom: 10px; display: block; opacity: 0.9; }
+.feature-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
 
-        /* PC용 화살표 버튼 */
-        .scroll-btn {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--accent-neon);
-            color: var(--accent-neon);
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: 0.3s;
-            display: none; /* 모바일에선 숨김 */
-            flex-shrink: 0;
-            align-items: center;
-            justify-content: center;
-        }
-        .scroll-btn:hover { background: var(--accent-neon); color: black; box-shadow: 0 0 15px var(--accent-neon); }
+/* ★★★ Responsive Gallery (PC Arrow + Mobile Swipe) ★★★ */
+.gallery-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1400px; /* PC에서 너무 퍼지지 않게 */
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
 
-        /* PC 화면(768px 이상)일 때만 화살표 보이기 & 아이템 크기 조정 */
-        @media (min-width: 769px) {
-            .scroll-btn { display: flex; } /* PC에선 화살표 보임 */
-            .screenshot-item { width: 45%; } /* PC에선 한 번에 2개 정도 보이게 */
-        }
+/* 갤러리 컨테이너 */
+#screenshot-gallery {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px; /* 아이템 간격은 여기서만 컨트롤 */
+    padding: 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+#screenshot-gallery::-webkit-scrollbar { display: none; }
+
+/* ---- 스크린샷 아이템 (부모 틀) ---- */
+.screenshot-item {
+    flex: 0 0 auto;
+    height: 350px; 
+    /* [핵심] 여기서 2796:1290 비율을 미리 잡아줌 (브라우저 계산 오류 및 잘림 원천 차단) */
+    aspect-ratio: 2796 / 1290; 
+    border-radius: 15px;
+    scroll-snap-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    background: #1a1a2e;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ---- 이미지 채우기 (중복 코드 싹 지우고 딱 하나만 남길 것) ---- */
+.fill-img {
+    width: 100%;
+    height: 100%;
+    /* 부모 틀 안에서 절대 잘리지 않고 원본 비율 맞춰서 들어감 */
+    object-fit: contain; 
+    display: block;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.fill-img.loaded {
+    opacity: 1;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .screenshot-item {
+        width: 85vw; /* 모바일 화면 가로 넓이의 85%만 차지하게 강제 (절대 안 짤림) */
+        height: auto; /* 높이는 2796:1290 비율에 맞춰서 브라우저가 알아서 줄임 */
+    }
+}
+
+/* PC용 화살표 버튼 */
+.scroll-btn {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--accent-neon);
+    color: var(--accent-neon);
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+    display: none; /* 모바일에선 숨김 */
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+}
+.scroll-btn:hover { background: var(--accent-neon); color: black; box-shadow: 0 0 15px var(--accent-neon); }
+
+/* PC 화면(768px 이상)일 때만 화살표 보이기 & 아이템 크기 조정 */
+@media (min-width: 769px) {
+    .scroll-btn { display: flex; } /* PC에선 화살표 보임 */
+    .screenshot-item { width: 45%; } /* PC에선 한 번에 2개 정도 보이게 */
+}
 
 
-        /* ---- Download Section ---- */
-        .download-section {
-            background: linear-gradient(180deg, transparent, rgba(255, 0, 85, 0.1));
-            text-align: center;
-            padding: 100px 20px;
-            margin-top: 50px;
-        }
+/* ---- Download Section ---- */
+.download-section {
+    background: linear-gradient(180deg, transparent, rgba(255, 0, 85, 0.1));
+    text-align: center;
+    padding: 100px 20px;
+    margin-top: 50px;
+}
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 40px;
-            background: var(--accent-pink);
-            color: white;
-            border-radius: 50px;
-            font-weight: 900;
-            font-size: 1.1rem;
-            margin: 10px;
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: none;
-            cursor: pointer;
-        }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(255, 0, 85, 0.6); }
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 40px;
+    background: var(--accent-pink);
+    color: white;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    margin: 10px;
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+}
+.btn:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(255, 0, 85, 0.6); }
 
-        .btn-google {
-            background: transparent;
-            border: 2px solid var(--accent-neon);
-            color: var(--accent-neon);
-            box-shadow: none;
-        }
-        .btn-google:hover {
-            background: var(--accent-neon);
-            color: var(--bg-color);
-            box-shadow: 0 0 20px var(--accent-neon);
-        }
-        
-        .store-icon { margin-right: 10px; font-size: 1.3rem; }
+.btn-google {
+    background: transparent;
+    border: 2px solid var(--accent-neon);
+    color: var(--accent-neon);
+    box-shadow: none;
+}
+.btn-google:hover {
+    background: var(--accent-neon);
+    color: var(--bg-color);
+    box-shadow: 0 0 20px var(--accent-neon);
+}
 
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            background: rgba(0,0,0,0.2);
-        }
+.store-icon { margin-right: 10px; font-size: 1.3rem; }
 
-                /* ---- Official Store Badge Style ---- */
-        .store-badge {
-            height: 60px; /* 배지 높이 고정 (조절 가능) */
-            width: auto;
-            transition: transform 0.3s ease, filter 0.3s ease;
-            cursor: pointer;
-            margin: 10px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); /* 그림자 */
-        }
-        
-        .store-badge:hover {
-            transform: scale(1.05); /* 호버 시 살짝 커짐 */
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)); /* 빛나는 효과 */
-        }
-    </style>
+footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background: rgba(0,0,0,0.2);
+}
+
+        /* ---- Official Store Badge Style ---- */
+.store-badge {
+    height: 60px; /* 배지 높이 고정 (조절 가능) */
+    width: auto;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+    margin: 10px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); /* 그림자 */
+}
+
+.store-badge:hover {
+    transform: scale(1.05); /* 호버 시 살짝 커짐 */
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)); /* 빛나는 효과 */
+}

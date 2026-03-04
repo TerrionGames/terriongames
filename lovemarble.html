@@ -80,7 +80,57 @@
     "url": "https://terriongames.com/lovemarble.html"
     }
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 무한 루프 방지
+        if (sessionStorage.getItem('lang_redirected')) {
+            return;
+        }
 
+        // 전체 언어 코드 가져오기 (예: 'es-mx', 'ko-kr', 'en-us')
+        var fullLang = (navigator.language || navigator.userLanguage).toLowerCase();
+        // 앞의 두 글자만 추출 (예: 'es', 'ko', 'en')
+        var shortLang = fullLang.substring(0, 2);
+        
+        // 영어(en) 유저면 리다이렉트 안 함
+        if (shortLang === 'en') return;
+
+        var targetPage = '';
+
+        // 1. 스페인어 정밀 타겟팅 (es-ES vs es-MX)
+        if (shortLang === 'es') {
+            // 스페인 본토(es-es) 접속자만 es-ES로 보냄
+            if (fullLang === 'es-es') {
+                targetPage = 'lovemarble_es-ES.html';
+            } 
+            // 멕시코(es-mx), 아르헨티나(es-ar), 미국 스페인어(es-us) 등 나머지는 전부 es-MX로 통일
+            else {
+                targetPage = 'lovemarble_es-MX.html';
+            }
+        } 
+        // 2. 포르투갈어 (브라질)
+        else if (shortLang === 'pt') {
+            targetPage = 'lovemarble_pt-BR.html';
+        }
+        // 3. 중국어 (대만/홍콩 번체)
+        else if (shortLang === 'zh') {
+            targetPage = 'lovemarble_zh-TW.html';
+        }
+        // 4. 나머지 11개 일반 국가들
+        else {
+            var supportedLangs = ['ko', 'ja', 'th', 'vi', 'hi', 'id', 'fr', 'de', 'it', 'ru', 'tr'];
+            if (supportedLangs.includes(shortLang)) {
+                targetPage = 'lovemarble_' + shortLang + '.html';
+            }
+        }
+
+        // 타겟 페이지가 매핑되었으면 즉시 이동
+        if (targetPage) {
+            sessionStorage.setItem('lang_redirected', 'true');
+            window.location.replace('./' + targetPage);
+        }
+    });
+    </script>
 </head>
 <body>
 

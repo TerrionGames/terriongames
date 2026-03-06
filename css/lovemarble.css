@@ -317,3 +317,27 @@ footer {
     transform: scale(1.05); /* 호버 시 살짝 커짐 */
     filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)); /* 빛나는 효과 */
 }
+/* 다국어 SEO 전용 푸터 링크 */
+.lang-links {
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.8rem;
+    color: #666; 
+    line-height: 2;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* 얇은 구분선 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 15px; /* 단어 사이 간격 */
+}
+
+.lang-links a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.lang-links a:hover {
+    color: #fff; /* 마우스 올리면 밝아짐 */
+}
